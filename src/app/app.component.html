@@ -4,12 +4,12 @@
     <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
         <form class="form">
             <mat-form-field class="full-width">
-              <input [(ngModel)]="search" matInput placeholder="Search for any question...." name="search" (input)="onChange( $event.target.value )" value="Sushi" />
+              <input matInput placeholder="Search for any question...." (input)="onChange( $event.target.value )" />
             </mat-form-field>
         </form>
     </div>
     <div class="row container">
-      <app-search-results [search]="search"></app-search-results>
+      <app-search-results [searchResults]="searchResults | async"></app-search-results>
     </div>
   </div>
 </div>

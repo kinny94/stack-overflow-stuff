@@ -1,6 +1,7 @@
 import { SearchService } from './services/search.service';
 import { Component } from '@angular/core';
 import { state, trigger, style, animate, transition } from '@angular/animations';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -26,10 +27,9 @@ import { state, trigger, style, animate, transition } from '@angular/animations'
 
 export class AppComponent {
 
-  title = 'stack-overflow';
-  search: string;
   state = 'mid';
   isInMid = false;
+  searchResults: Observable<{}>;
 
   constructor( private searchService: SearchService ) {}
 
@@ -43,13 +43,15 @@ export class AppComponent {
     if ( event === '' ) {
       this.state = 'mid';
       this.isInMid = false;
+    } else {
+      this.getSearchResults( event );
     }
-    this.search = event;
-    this.getSearchResults( event );
+
   }
 
   getSearchResults( searchQuery ) {
     this.searchService.getSearchResults( searchQuery ).subscribe( data => console.log( data ));
+    this.searchResults = this.searchService.getSearchResults( searchQuery );
   }
 
 }

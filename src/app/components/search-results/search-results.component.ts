@@ -9,11 +9,10 @@ import { SearchService } from '../../services/search.service';
 
 export class SearchResultsComponent implements OnInit {
 
-  @Input() search;
+  @Input() searchResults;
 
   constructor( private searchService: SearchService ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
