@@ -1,3 +1,4 @@
+import { SearchService } from './services/search.service';
 import { Component } from '@angular/core';
 import { state, trigger, style, animate, transition } from '@angular/animations';
 
@@ -30,7 +31,7 @@ export class AppComponent {
   state = 'mid';
   isInMid = false;
 
-  constructor() {}
+  constructor( private searchService: SearchService ) {}
 
   onChange( event ) {
 
@@ -44,6 +45,12 @@ export class AppComponent {
       this.isInMid = false;
     }
     this.search = event;
+    this.getSearchResults( event );
   }
+
+  getSearchResults( searchQuery ) {
+    this.searchService.getSearchResults( searchQuery ).subscribe( data => console.log( data ));
+  }
+
 }
 
