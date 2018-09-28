@@ -24,23 +24,23 @@ import { state, trigger, style, animate, transition } from '@angular/animations'
 })
 
 export class AppComponent {
-  
+
   title = 'stack-overflow';
   search: string;
-  state:string = "mid";
+  state = 'mid';
   isInMid = false;
-  
+
   constructor() {}
-  
+
   onChange( event ) {
 
-    if( this.state === "mid" ){
-      this.state = "up";
+    if ( this.state === 'mid' ) {
+      this.state = 'up';
       this.isInMid = true;
     }
-    
-    if( event === "" ){
-      this.state = "mid";
+
+    if ( event === '' ) {
+      this.state = 'mid';
       this.isInMid = false;
     }
     this.search = event;
