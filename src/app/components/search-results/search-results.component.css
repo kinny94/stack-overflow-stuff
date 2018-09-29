@@ -3,6 +3,11 @@
   cursor: pointer;
 }
 
+.card button{
+  background-color: #673ab7;
+  color: white;
+}
+
 .card:hover{
   background: #6f42c1;
 	transition: all .2s ease-in-out;
@@ -10,6 +15,13 @@
   color: white;
 }
 
+.card:hover button{
+  background-color: white;
+  color: #673ab7;
+}
+
 .tags{
   margin-left: 3px;
 }
+
+
