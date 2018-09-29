@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
+      <form class="form">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Search for any question...." (input)="onChange( $event.target.value )" />
+          </mat-form-field>
+      </form>
+  </div>
+  <div class="container">
+    <app-search-results [searchResults]="searchResults | async"></app-search-results>
+  </div>
+</div>

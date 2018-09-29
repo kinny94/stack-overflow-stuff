@@ -11,15 +11,20 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { SearchService } from './services/search.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuestionComponent } from './components/question-component/question-component.component';
+import { SearchComponent } from './components/search/search.component';
 
-export class AppRoutingModule {}
-
+const appRoutes: Routes = [
+  { path: 'quwstion', component: QuestionComponent  },
+  { path: '**', component: AppComponent }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    SearchResultsComponent
+    SearchResultsComponent,
+    QuestionComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,
@@ -28,8 +33,8 @@ export class AppRoutingModule {}
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: '', component: AppComponent },
-      { path: 'question', component: QuestionComponent }
+      { path: 'question', component: QuestionComponent, pathMatch: 'full' },
+      { path: '', component: SearchComponent, pathMatch: 'full' }
     ])
   ],
   providers: [

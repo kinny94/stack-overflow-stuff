@@ -1,6 +1,6 @@
 <div *ngIf="searchResults">
   <div *ngFor="let item of searchResults.items">
-    <mat-card class="card" >
+    <mat-card class="card" routerLink="/question">
       <p>{{ item.title }}</p>
       <span *ngFor="let tag of item.tags">
         <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
@@ -15,4 +15,5 @@
     <mat-divider></mat-divider>
   </div>
 </div>
+
 
