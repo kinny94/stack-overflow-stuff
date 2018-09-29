@@ -1,2 +1,13 @@
-<p>I am the search-result component</p>
-<p *ngIf="searchResults">{{ searchResults["quota_remaining"] }}</p>
+<div *ngIf="searchResults">
+  <div *ngFor="let item of searchResults.items">
+    <mat-card class="card" >
+      <p>{{ item.title }}</p>
+      <span *ngFor="let tag of item.tags">
+        <button class="tags" mat-raised-button mat-small color="primary" >{{ tag }}</button>
+      </span>
+
+    </mat-card>
+    <mat-divider></mat-divider>
+  </div>
+</div>
+

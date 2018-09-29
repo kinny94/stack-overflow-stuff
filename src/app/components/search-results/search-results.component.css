@@ -1,0 +1,15 @@
+.card{
+  width: 100%;
+  cursor: pointer;
+}
+
+.card:hover{
+  background: #6f42c1;
+	transition: all .2s ease-in-out;
+  transform: scale(1.01);
+  color: white;
+}
+
+.tags{
+  margin-left: 3px;
+}

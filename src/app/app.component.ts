@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   animations: [
     trigger('changeState', [
       state('up', style({
-        paddingTop: '0%',
+        paddingTop: '2%',
       })),
       state('mid', style({
         paddingTop: '30%',
