@@ -2,15 +2,21 @@
   <div *ngFor="let item of searchResults.items">
     <mat-card class="card" routerLink="/question">
       <p>{{ item.title }}</p>
-      <span *ngFor="let tag of item.tags">
-        <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
-      </span>
-      <span *ngIf="item.is_answered" class="float-right">
-        <button mat-raised-button mat-small class="answered">Answered</button>
-      </span>
-      <span *ngIf="!item.is_answered" class="float-right">
-        <button mat-raised-button mat-small class="not-answered">Not Answered</button>
-      </span>
+      <div class="row">
+        <div class="col-10 col-xs-12">
+          <span *ngFor="let tag of item.tags">
+            <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
+          </span>
+        </div>
+        <div class="col col-xs-12">
+          <span *ngIf="item.is_answered" class="float-right">
+            <button mat-raised-button mat-small class="answered" matBadge="{{ item.answer_count }}" matBadgePosition="before" matBadgeColor="accent">Answered</button>
+          </span>
+          <span *ngIf="!item.is_answered" class="float-right">
+            <button mat-raised-button mat-small class="not-answered">Not Answered</button>
+          </span>
+        </div>
+      </div>
     </mat-card>
     <mat-divider></mat-divider>
   </div>
