@@ -9,6 +9,11 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
 import { SearchResultsComponent } from './components/search-results/search-results.component';
 import { SearchService } from './services/search.service';
+import { RouterModule, Routes } from '@angular/router';
+import { QuestionComponent } from './components/question-component/question-component.component';
+
+export class AppRoutingModule {}
+
 
 @NgModule({
   declarations: [
@@ -21,7 +26,11 @@ import { SearchService } from './services/search.service';
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      { path: '', component: AppComponent },
+      { path: 'question', component: QuestionComponent }
+    ])
   ],
   providers: [
     SearchService
