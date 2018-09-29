@@ -20,6 +20,26 @@
   color: #673ab7;
 }
 
+.card .answered{
+  background-color:#26A69A;
+  color: white;
+}
+
+.card:hover .answered{
+  background-color: white;
+  color: #26A69A;
+}
+
+.card .not-answered{
+  background-color: #DD2C00;
+  color: white;
+}
+
+.card:hover .not-answered{
+  background-color: white;
+  color: #DD2C00;
+}
+
 .tags{
   margin-left: 3px;
 }

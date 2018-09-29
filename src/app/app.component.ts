@@ -42,7 +42,6 @@ export class AppComponent {
 
     if ( event === '' ) {
       this.state = 'mid';
-      this.isInMid = false;
     } else {
       this.getSearchResults( event );
     }

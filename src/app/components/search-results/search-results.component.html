@@ -5,7 +5,12 @@
       <span *ngFor="let tag of item.tags">
         <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
       </span>
-
+      <span *ngIf="item.is_answered" class="float-right">
+        <button mat-raised-button mat-small class="answered">Answered</button>
+      </span>
+      <span *ngIf="!item.is_answered" class="float-right">
+        <button mat-raised-button mat-small class="not-answered">Not Answered</button>
+      </span>
     </mat-card>
     <mat-divider></mat-divider>
   </div>
