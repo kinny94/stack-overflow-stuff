@@ -16,3 +16,25 @@
 .mat-progress-bar{
   margin-top: 35%;
 }
+.mat-card{
+  margin-top: 2%;
+}
+
+.mat-card .button-color{
+  background-color: #6f42c1;
+}
+
+.mat-card:hover{
+  background-color: #6f42c1;
+  color: white;
+  transition: all .2s ease-in-out;
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.mat-card:hover .button-color{
+  background-color:#26A69A;
+}
+.owner{
+  margin-left: 3px;
+}

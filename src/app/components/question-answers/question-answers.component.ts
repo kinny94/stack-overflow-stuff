@@ -1,7 +1,6 @@
 import { QuestionService } from './../../services/question.service';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs';
 
@@ -12,14 +11,14 @@ import { of } from 'rxjs';
 })
 export class QuestionAnswersComponent implements OnInit {
 
-  question_details$: Observable<[]>;
+  question_details$: [];
   isLoading = true;
 
   constructor( private route: ActivatedRoute, private questionService: QuestionService ) { }
 
   ngOnInit() {
 
-    this.question_details$ = this.route.queryParams.pipe(
+    this.route.queryParams.pipe(
       map(params => params.question_id ? params.question_id : undefined ),
       switchMap(qID => qID ? this.questionService.getQuestionDetails(qID) : undefined ),
       map((qDetails: any) => {
@@ -29,10 +28,9 @@ export class QuestionAnswersComponent implements OnInit {
         }
       }),
       catchError( error => of(error)),
-    );
-
-    this.question_details$.subscribe( data => {
-      console.log( 'From Question Component', data );
+    ).subscribe( data => {
+      console.log( data );
+      this.question_details$ = data;
     });
   }
 

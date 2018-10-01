@@ -12,7 +12,7 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class QuestionComponent implements OnInit {
 
   question_id: string;
-  question$: Observable<{}>;
+  question$: {};
   isAnswered$: Observable<boolean>;
   isLoading = true;
 
@@ -21,13 +21,16 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
 
     this.question_id = this.route.snapshot.queryParamMap.get( 'question_id' );
-    this.question$ = this.questionService.getQuestion( this.question_id ).pipe(
+    this.questionService.getQuestion( this.question_id ).pipe(
       map( (question_details: any) => {
         this.isLoading = false;
         return question_details.items[0] ;
       })
-    );
+    ).subscribe( data => {
+      this.question$ = data;
+      console.log( this.question$ );
+    });
 
-    // this.question$.subscribe( data => console.log( data ));
+
   }
 }
