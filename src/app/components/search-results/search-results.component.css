@@ -45,6 +45,10 @@
   margin-top: 3px;
 }
 
+a:hover{
+  text-decoration: none;
+}
+
 @media only screen and (max-width: 600px) {
   .card button{
     min-width: 1%;

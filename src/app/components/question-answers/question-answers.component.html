@@ -1,0 +1,18 @@
+<div class="container">
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading;else receivedQuestion" ></mat-progress-bar>
+  <ng-template #receivedQuestion>
+    <div *ngIf="(question_details$ | async)?.is_answered">
+      <mat-card class="center">
+        <p><strong>This question has not been answered yet!!</strong></p>
+        <div>
+          <a target="_blank" href="{{ (question_details$ | async)?.link }}"><button mat-raised-button class="button-color">Answer</button></a>
+        </div>
+      </mat-card>
+    </div>
+    <div *ngIf="!(question_details$ | async )?.is_answered">
+      <mat-card *ngFor="let answer of question_details$ | async">
+
+      </mat-card>
+    </div>
+  </ng-template>
+</div>

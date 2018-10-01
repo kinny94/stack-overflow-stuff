@@ -1,3 +1,6 @@
-<p>
-  question-component works!
-</p>
+<div class="container">
+  <div class="col-12" *ngIf="!isLoading">
+    <h6>Question: {{ question$.title  }}</h6>
+  </div>
+  <app-question-answers></app-question-answers>
+</div>

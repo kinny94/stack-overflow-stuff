@@ -1,3 +1,4 @@
+import { QuestionService } from './services/question.service';
 import { MaterialModule } from './material_modules/material_modules';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -12,6 +13,7 @@ import { SearchService } from './services/search.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuestionComponent } from './components/question-component/question-component.component';
 import { SearchComponent } from './components/search/search.component';
+import { QuestionAnswersComponent } from './components/question-answers/question-answers.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -24,7 +26,8 @@ const appRoutes: Routes = [
     HeaderComponent,
     SearchResultsComponent,
     QuestionComponent,
-    SearchComponent
+    SearchComponent,
+    QuestionAnswersComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +41,8 @@ const appRoutes: Routes = [
     ])
   ],
   providers: [
-    SearchService
+    SearchService,
+    QuestionService
   ],
   bootstrap: [AppComponent]
 })
