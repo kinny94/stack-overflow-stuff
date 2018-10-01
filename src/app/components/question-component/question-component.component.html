@@ -7,5 +7,5 @@
       <button *ngFor="let tag of question$.tags" mat-raised-button color="primary">{{ tag }}</button>
     </div>
   </div>
-  <app-question-answers></app-question-answers>
+  <app-question-answers [questionLink]="questionLink"></app-question-answers>
 </div>

@@ -1,7 +1,7 @@
 import { QuestionService } from './../../services/question.service';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { of } from 'rxjs';
 
 @Component({
@@ -10,6 +10,8 @@ import { of } from 'rxjs';
   styleUrls: ['./question-answers.component.css']
 })
 export class QuestionAnswersComponent implements OnInit {
+
+  @Input() questionLink;
 
   question_details$: [];
   isLoading = true;

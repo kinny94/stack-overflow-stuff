@@ -9,8 +9,8 @@
 }
 
 .button-color:hover{
-  background-color: white;
-  color: #26A69A;
+  background-color: #26A69A;
+  color: white;
 }
 
 .mat-progress-bar{
@@ -32,9 +32,19 @@
   cursor: pointer;
 }
 
+a{
+  text-decoration: none;
+  color: white;
+}
+
 .mat-card:hover .button-color{
   background-color:#26A69A;
 }
 .owner{
   margin-left: 3px;
+  color: white;
+}
+
+.profile:hover{
+  background-color: #26A69A;
 }

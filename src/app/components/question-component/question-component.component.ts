@@ -13,6 +13,7 @@ export class QuestionComponent implements OnInit {
 
   question_id: string;
   question$: {};
+  questionLink: string;
   isAnswered$: Observable<boolean>;
   isLoading = true;
 
@@ -28,7 +29,8 @@ export class QuestionComponent implements OnInit {
       })
     ).subscribe( data => {
       this.question$ = data;
-      console.log( this.question$ );
+      this.questionLink = data.link;
+      console.log( this.questionLink );
     });
 
 
