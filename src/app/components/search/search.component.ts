@@ -52,7 +52,7 @@ export class SearchComponent implements OnInit {
   }
 
   getSearchResults( searchQuery ) {
-    this.searchService.getSearchResults( searchQuery ).subscribe( data => console.log( data ));
+    this.searchService.getSearchResults( searchQuery );
     this.searchResults = this.searchService.getSearchResults( searchQuery );
   }
 

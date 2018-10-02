@@ -11,15 +11,16 @@ import { of } from 'rxjs';
 })
 export class QuestionAnswersComponent implements OnInit {
 
-  @Input() questionLink;
+  @Input() question;
 
-  question_details$: [];
+  question_details$ = [];
+  isAnswered: boolean;
   isLoading = true;
 
   constructor( private route: ActivatedRoute, private questionService: QuestionService ) { }
 
   ngOnInit() {
-
+    console.log( 'data', this.question );
     this.route.queryParams.pipe(
       map(params => params.question_id ? params.question_id : undefined ),
       switchMap(qID => qID ? this.questionService.getQuestionDetails(qID) : undefined ),
@@ -31,7 +32,6 @@ export class QuestionAnswersComponent implements OnInit {
       }),
       catchError( error => of(error)),
     ).subscribe( data => {
-      console.log( data );
       this.question_details$ = data;
     });
   }

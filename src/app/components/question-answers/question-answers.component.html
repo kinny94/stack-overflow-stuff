@@ -1,7 +1,7 @@
 <div class="container">
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading;else receivedQuestion" ></mat-progress-bar>
   <ng-template #receivedQuestion>
-    <div *ngIf="question_details$.is_answered">
+    <div *ngIf="question_details$.is_answered; else answer">
       <mat-card class="center">
         <p><strong>This question has not been answered yet!!</strong></p>
         <div>
@@ -9,22 +9,24 @@
         </div>
       </mat-card>
     </div>
-    <div *ngIf="!question_details$.is_answered">
-      <div *ngFor="let answer of question_details$">
-        <a target="_blank" href="{{ questionLink }}/{{ answer.answer_id }}#{{ answer.answer_id }}"><mat-card>
-          <div class="row">
-            <div class="col-4 col-xs-12"><strong><p>Answer Accepted: {{ answer.is_accepted ? "Yes" : "No" }}</p></strong></div>
-            <div class="col-4 col-xs-12"><strong><p>Score: <span matBadge="{{ answer.score }}" matBadgeOverlap="false" matBadgeColor="accent"></span></p></strong></div>
-            <div class="col-4 col-xs-12"><strong><p>Date: {{ answer.creation_date | date }}</p></strong></div>
-          </div>
-          <strong><p>Owner details:
-            <button class="owner button-color" mat-raised-button color="primary">Reputation : {{ answer.owner.reputation }}</button>
-            <button class="owner button-color" mat-raised-button color="primary">Display Name : {{ answer.owner.display_name }}</button>
-            <a target="_blank" href="{{ answer.owner.link }}"><button class="owner profile" mat-raised-button color="accent">View Profile</button></a>
-          </p></strong>
-        </mat-card></a>
-      </div>
+    <ng-template #answer>
+        <div *ngIf="!question_details$.is_answered">
+            <div *ngFor="let answer of question_details$">
+              <a target="_blank" href="{{ questionLink }}/{{ answer.answer_id }}#{{ answer.answer_id }}"><mat-card>
+                <div class="row">
+                  <div class="col-4 col-xs-12"><strong><p>Answer Accepted: {{ answer.is_accepted ? "Yes" : "No" }}</p></strong></div>
+                  <div class="col-4 col-xs-12"><strong><p>Score: <span matBadge="{{ answer.score }}" matBadgeOverlap="false" matBadgeColor="accent"></span></p></strong></div>
+                  <div class="col-4 col-xs-12"><strong><p>Date: {{ answer.creation_date | date }}</p></strong></div>
+                </div>
+                <strong><p>Owner details:
+                  <button class="owner button-color" mat-raised-button color="primary">Reputation : {{ answer.owner.reputation }}</button>
+                  <button class="owner button-color" mat-raised-button color="primary">Display Name : {{ answer.owner.display_name }}</button>
+                  <a target="_blank" href="{{ answer.owner.link }}"><button class="owner profile" mat-raised-button color="accent">View Profile</button></a>
+                </p></strong>
+              </mat-card></a>
+            </div>
 
-    </div>
+          </div>
+    </ng-template>
   </ng-template>
 </div>

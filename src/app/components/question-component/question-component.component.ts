@@ -30,7 +30,6 @@ export class QuestionComponent implements OnInit {
     ).subscribe( data => {
       this.question$ = data;
       this.questionLink = data.link;
-      console.log( this.questionLink );
     });
 
 
