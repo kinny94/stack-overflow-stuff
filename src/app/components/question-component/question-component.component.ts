@@ -1,8 +1,7 @@
-import { Observable, of } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from './../../services/question.service';
 import { Component, OnInit } from '@angular/core';
-import { map, switchMap, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-question-component',
@@ -12,7 +11,7 @@ import { map, switchMap, catchError } from 'rxjs/operators';
 export class QuestionComponent implements OnInit {
 
   question_id: string;
-  question$: {};
+  question: {};
   questionLink: string;
   isLoading = true;
 
@@ -27,10 +26,9 @@ export class QuestionComponent implements OnInit {
         return question_details.items[0] ;
       })
     ).subscribe( data => {
-      this.question$ = data;
+      this.question = data;
       this.questionLink = data.link;
     });
-
 
   }
 }
