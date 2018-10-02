@@ -11,29 +11,40 @@ import { of } from 'rxjs';
 })
 export class QuestionAnswersComponent implements OnInit {
 
-  @Input() question;
+  @Input() question: any;
 
   question_details$ = [];
-  isAnswered: boolean;
+  isAnswered = false;
   isLoading = true;
 
   constructor( private route: ActivatedRoute, private questionService: QuestionService ) { }
 
   ngOnInit() {
-    console.log( 'data', this.question );
-    this.route.queryParams.pipe(
-      map(params => params.question_id ? params.question_id : undefined ),
-      switchMap(qID => qID ? this.questionService.getQuestionDetails(qID) : undefined ),
-      map((qDetails: any) => {
-        if ( qDetails && qDetails.items && qDetails.items.length > 0 ) {
-          this.isLoading = false;
-          return  qDetails.items;
-        }
-      }),
-      catchError( error => of(error)),
-    ).subscribe( data => {
-      this.question_details$ = data;
-    });
-  }
 
-}
+    console.log( this.question.link );
+
+    if ( this.question.is_answered ) {
+      this.route.queryParams.pipe(
+        map(params => params.question_id ? params.question_id : undefined ),
+        switchMap(qID => qID ? this.questionService.getQuestionDetails(qID) : undefined ),
+        map((qDetails: any) => {
+          if ( qDetails && qDetails.items && qDetails.items.length > 0 ) {
+            setTimeout(() => {
+              this.isLoading = false;
+              this.isAnswered = this.question.is_answered;
+            }, 300);
+            return  qDetails.items;
+          }
+        }),
+        catchError( error => of(error)),
+        ).subscribe( data => {
+          this.question_details$ = data;
+        });
+      } else {
+        setTimeout(() => {
+          this.isLoading = false;
+        }, 300);
+      }
+    }
+
+  }
