@@ -5,7 +5,9 @@
       <div class="row">
         <div class="col-10 col-xs-12">
           <span *ngFor="let tag of item.tags">
-            <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
+              <a routerLink='/tag/questions' [queryParams]="{ tag: tag }">
+                <button class="tags" mat-raised-button mat-small>{{ tag }}</button>
+              </a>
           </span>
         </div>
         <div class="col col-xs-12">

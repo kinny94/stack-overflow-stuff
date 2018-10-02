@@ -16,6 +16,7 @@ import { QuestionComponent } from './components/question-component/question-comp
 import { SearchComponent } from './components/search/search.component';
 import { QuestionAnswersComponent } from './components/question-answers/question-answers.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { TagQuestionsComponent } from './components/tag-questions/tag-questions.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -30,7 +31,8 @@ const appRoutes: Routes = [
     QuestionComponent,
     SearchComponent,
     QuestionAnswersComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    TagQuestionsComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +43,9 @@ const appRoutes: Routes = [
     RouterModule.forRoot([
       { path: 'question', component: QuestionComponent, pathMatch: 'full' },
       { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
-      { path: '', component: SearchComponent, pathMatch: 'full' }
+      { path: 'tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
+      { path: '', component: SearchComponent, pathMatch: 'full' },
+      { path: '**', component: SearchComponent }
     ])
   ],
   providers: [

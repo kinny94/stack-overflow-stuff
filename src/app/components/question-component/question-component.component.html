@@ -4,7 +4,11 @@
       <a target="_blank" href="{{ question.link }}"><h6><strong  matBadge="{{ question.score }}"  matBadgePosition="before" matBadgeOverlap="false"  matBadgeColor="warn">Question: {{ question.title  }}</strong></h6></a>
     </div>
     <div class="col-12 tags">
-      <button *ngFor="let tag of question.tags" mat-raised-button color="primary">{{ tag }}</button>
+      <span *ngFor="let tag of question.tags">
+        <a routerLink='/tag/questions' [queryParams]="{ tag: tag }">
+          <button  mat-raised-button color="primary">{{ tag }}</button>
+        </a>
+      </span>
     </div>
   </div>
   <app-question-answers *ngIf="question" [question]="question"></app-question-answers>
