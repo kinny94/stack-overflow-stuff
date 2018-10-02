@@ -14,7 +14,6 @@ export class QuestionComponent implements OnInit {
   question_id: string;
   question$: {};
   questionLink: string;
-  isAnswered$: Observable<boolean>;
   isLoading = true;
 
   constructor( private questionService: QuestionService, private route: ActivatedRoute ) { }
