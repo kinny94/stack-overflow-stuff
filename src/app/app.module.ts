@@ -1,3 +1,4 @@
+import { UserProfileService } from './services/user-profile.service';
 import { QuestionService } from './services/question.service';
 import { MaterialModule } from './material_modules/material_modules';
 import { BrowserModule } from '@angular/platform-browser';
@@ -14,6 +15,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { QuestionComponent } from './components/question-component/question-component.component';
 import { SearchComponent } from './components/search/search.component';
 import { QuestionAnswersComponent } from './components/question-answers/question-answers.component';
+import { UserProfileComponent } from './components/user-profile/user-profile.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -27,7 +29,8 @@ const appRoutes: Routes = [
     SearchResultsComponent,
     QuestionComponent,
     SearchComponent,
-    QuestionAnswersComponent
+    QuestionAnswersComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -37,12 +40,14 @@ const appRoutes: Routes = [
     HttpClientModule,
     RouterModule.forRoot([
       { path: 'question', component: QuestionComponent, pathMatch: 'full' },
+      { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' }
     ])
   ],
   providers: [
     SearchService,
-    QuestionService
+    QuestionService,
+    UserProfileService
   ],
   bootstrap: [AppComponent]
 })

@@ -1,0 +1,31 @@
+.profile-card{
+  margin-top: 20%;
+}
+
+h6{
+  padding: 2%;
+}
+
+.profile-data{
+  text-align: left;
+}
+
+.borders{
+  border-left: 3px solid #ccc;
+}
+.silver{
+  background-color: #C0C0C0;
+  color: white;
+  margin-left: 2%;
+}
+
+.gold{
+  background-color: #FFD700;
+  color: white;
+  margin-left: 2%;
+}
+
+.bronze{
+  background-color: #cc6633;
+  color: white;
+}

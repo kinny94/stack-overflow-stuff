@@ -1,0 +1,26 @@
+<div class="container profile-card">
+  <div *ngIf="isLoading; else content">
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading" ></mat-progress-bar>
+  </div>
+  <ng-template #content>
+    <mat-card>
+      <div class="row">
+        <div class="col-6 col-xs-12">
+          <img src="{{ userData.profile_image }}"/>
+        </div>
+        <div class="col-6 col-xs-12 borders profile-data">
+          <h6><strong>Display Name: {{ userData.display_name }}</strong></h6>
+          <h6><strong>Location: {{ userData.location }}</strong></h6>
+          <h6><strong>User Since: {{ userData.last_access_date | date }}</strong></h6>
+          <h6><strong>User ID: {{ userData.user_id }}</strong></h6>
+          <h6><button mat-raised-button color="primary">Reputation: {{ userData.reputation }}</button></h6>
+          <h6>
+            <button mat-raised-button class="bronze">Bronze: {{ userData.badge_counts.bronze }}</button>
+            <button mat-raised-button class="silver">Silver: {{ userData.badge_counts.silver }}</button>
+            <button mat-raised-button class="gold">Gold: {{ userData.badge_counts.gold }}</button>
+          </h6>
+        </div>
+      </div>
+    </mat-card>
+  </ng-template>
+</div>

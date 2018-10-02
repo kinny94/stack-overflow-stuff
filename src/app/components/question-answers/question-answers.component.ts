@@ -21,7 +21,6 @@ export class QuestionAnswersComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log( this.question.link );
 
     if ( this.question.is_answered ) {
       this.route.queryParams.pipe(
@@ -38,6 +37,7 @@ export class QuestionAnswersComponent implements OnInit {
         }),
         catchError( error => of(error)),
         ).subscribe( data => {
+          console.log( data );
           this.question_details$ = data;
         });
       } else {
