@@ -51,6 +51,6 @@ export class GithubSearchComponent implements OnInit {
   }
 
   getSearchResults( searchQuery ) {
-    this.githubUserService.getSearchResults( searchQuery ).subscribe( data => console.log( data ));
+    this.searchResults = this.githubUserService.getSearchResults( searchQuery );
   }
 }

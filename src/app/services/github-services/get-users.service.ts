@@ -8,13 +8,13 @@ import { environment } from '../../../environments/environment.prod';
 export class GetUsersService {
 
   clientId = environment.github.clientId;
-  clentSecret = environment.github.client_secret;
+  clientSecret = environment.github.client_secret;
 
   url = 'https://api.github.com/users';
 
   constructor( private http: HttpClient ) {}
 
   getSearchResults = ( searchQuery ) => {
-    return this.http.get(`${ this.url }/${ searchQuery }`);
+    return this.http.get(`${ this.url }/${ searchQuery }?client_id=${ this.clientId }&client_secret=${ this.clientSecret }`);
   }
 }

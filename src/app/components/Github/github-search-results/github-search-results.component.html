@@ -1,0 +1,27 @@
+<div class="container">
+  <div *ngIf="searchResults">
+    <mat-card>
+      <div class="row">
+        <div class="col-2 col-xs-12">
+          <img src="{{ searchResults.avatar_url }}" class="img-fluid"/>
+        </div>
+        <div class="col-10 col-xs-12">
+          <h6><strong>Username: {{ searchResults.login }}</strong></h6>
+          <h6><strong>Name: {{ searchResults.name }}</strong></h6>
+          <h6><strong>Location: {{ searchResults.location }}</strong></h6>
+          <h6><strong>Member since: {{ searchResults.created_at }}</strong></h6>
+          <h6><strong>Last Online: {{ searchResults.updated_at }}</strong></h6>
+          <h6>
+            <span>
+              <button mat-raised-button class="btns">{{ searchResults.public_repos }} Repositories</button>
+              <button mat-raised-button class="btns">{{ searchResults.gist }} Gists</button>
+              <button mat-raised-button class="btns">{{ searchResults.follwers }} Followers</button>
+              <button mat-raised-button class="btns">{{ searchResults.following }} Following</button>
+            </span>
+          </h6>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+

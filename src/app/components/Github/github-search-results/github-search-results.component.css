@@ -1,0 +1,28 @@
+.mat-card{
+  height: 250px;
+}
+
+.mat-card .img{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.mat-card .btns{
+  margin-right: 2%;
+  color: white;
+  background-color: #e91e63;
+}
+
+.mat-card:hover{
+  color: white;
+  background-color: #e91e63;
+  transition: all .2s ease-in-out;
+  transform: scale(1.01);
+  cursor: pointer;
+}
+
+.mat-card:hover .btns{
+  color: #e91e63;
+  background-color: white;
+}

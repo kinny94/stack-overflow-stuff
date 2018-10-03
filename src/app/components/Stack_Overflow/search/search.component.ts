@@ -52,7 +52,6 @@ export class SearchComponent implements OnInit {
   }
 
   getSearchResults( searchQuery ) {
-    this.searchService.getSearchResults( searchQuery );
     this.searchResults = this.searchService.getSearchResults( searchQuery );
   }
 

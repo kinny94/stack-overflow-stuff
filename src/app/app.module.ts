@@ -18,6 +18,7 @@ import { QuestionAnswersComponent } from './components/Stack_Overflow/question-a
 import { UserProfileComponent } from './components/Stack_Overflow/user-profile/user-profile.component';
 import { TagQuestionsComponent } from './components/Stack_Overflow/tag-questions/tag-questions.component';
 import { GithubSearchComponent } from './components/Github/github-search/github-search.component';
+import { GithubSearchResultsComponent } from './components/Github/github-search-results/github-search-results.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -34,7 +35,8 @@ const appRoutes: Routes = [
     QuestionAnswersComponent,
     UserProfileComponent,
     TagQuestionsComponent,
-    GithubSearchComponent
+    GithubSearchComponent,
+    GithubSearchResultsComponent
   ],
   imports: [
     BrowserModule,
