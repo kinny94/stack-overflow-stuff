@@ -7,5 +7,9 @@ export const environment = {
     projectId: 'info-9d66a',
     storageBucket: 'info-9d66a.appspot.com',
     messagingSenderId: '861547850859'
+  },
+  github: {
+    clientId: '1ba06330053057a7a529',
+    client_secret: 'ace3132f7eaeca0d3cd9ac6c64da1d25de7c54ad'
   }
 };

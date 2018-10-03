@@ -1,3 +1,4 @@
+import { GetUsersService } from './../../../services/github-services/get-users.service';
 import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -29,7 +30,7 @@ export class GithubSearchComponent implements OnInit {
   isInMid = false;
   searchResults: Observable<{}>;
 
-  constructor() { }
+  constructor( private githubUserService: GetUsersService ) { }
 
   ngOnInit() {
   }
@@ -50,5 +51,6 @@ export class GithubSearchComponent implements OnInit {
   }
 
   getSearchResults( searchQuery ) {
+    this.githubUserService.getSearchResults( searchQuery ).subscribe( data => console.log( data ));
   }
 }
