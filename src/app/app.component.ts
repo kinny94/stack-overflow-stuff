@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe(( val ) => {
       if ( val && val['url'] !== undefined ) {
         const route = val['url'].split('/')[1];
-        if ( route === 'stack-overflow' ) {
+        if ( route === 'stack-overflow' || route === '' ) {
           this.themeClass = 'stack-overflow';
         } else if ( route === 'github' ) {
           this.themeClass = 'github';

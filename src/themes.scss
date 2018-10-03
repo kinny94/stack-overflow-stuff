@@ -10,11 +10,14 @@ $custom-theme: mat-light-theme($custom-primary, $custom-accent);
 $github-primary: mat-palette( $mat-teal );
 $github-accent: mat-palette( $mat-yellow, 200 );
 
-$github-theme: mat-dark-theme( $github-primary, $github-accent );
+$github-theme: mat-light-theme( $github-primary, $github-accent );
 
 .stack-overflow{
   @include angular-material-theme($custom-theme);
 }
 .github{
   @include angular-material-theme($github-theme);
+  @include mat-form-field-theme($github-theme); // Form-Field theme
+  @include mat-input-theme($github-theme);
+
 }
