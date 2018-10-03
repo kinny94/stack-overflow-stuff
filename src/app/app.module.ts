@@ -1,3 +1,4 @@
+import { GetUsersService } from './services/github-services/get-users.service';
 import { UserProfileService } from './services/stack-overflow-services/user-profile.service';
 import { QuestionService } from './services/stack-overflow-services/question.service';
 import { MaterialModule } from './material_modules/material_modules';
@@ -19,6 +20,8 @@ import { UserProfileComponent } from './components/Stack_Overflow/user-profile/u
 import { TagQuestionsComponent } from './components/Stack_Overflow/tag-questions/tag-questions.component';
 import { GithubSearchComponent } from './components/Github/github-search/github-search.component';
 import { GithubSearchResultsComponent } from './components/Github/github-search-results/github-search-results.component';
+import { GithubUserComponent } from './components/Github/github-user/github-user.component';
+import { GithubSelectedUserService } from './services/github-services/github-selected-user.service';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -36,7 +39,8 @@ const appRoutes: Routes = [
     UserProfileComponent,
     TagQuestionsComponent,
     GithubSearchComponent,
-    GithubSearchResultsComponent
+    GithubSearchResultsComponent,
+    GithubUserComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ const appRoutes: Routes = [
       { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
       { path: 'stack-overflow/tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
       { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
+      { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])
@@ -56,7 +61,9 @@ const appRoutes: Routes = [
   providers: [
     SearchService,
     QuestionService,
-    UserProfileService
+    UserProfileService,
+    GithubSelectedUserService,
+    GetUsersService
   ],
   bootstrap: [AppComponent]
 })

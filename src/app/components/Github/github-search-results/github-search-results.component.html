@@ -1,6 +1,6 @@
 <div class="container">
   <div *ngIf="searchResults">
-    <mat-card>
+    <a routerLink='/github/user' [queryParams]="{ user_id: searchResults.login }"><mat-card>
       <div class="row">
         <div class="col-2 col-xs-12">
           <img src="{{ searchResults.avatar_url }}" class="img-fluid"/>
@@ -21,7 +21,7 @@
           </h6>
         </div>
       </div>
-    </mat-card>
+    </mat-card></a>
   </div>
 </div>
 
