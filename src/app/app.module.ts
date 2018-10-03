@@ -9,14 +9,14 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
-import { SearchResultsComponent } from './components/search-results/search-results.component';
+import { SearchResultsComponent } from './components/Stack_Overflow/search-results/search-results.component';
 import { SearchService } from './services/search.service';
 import { RouterModule, Routes } from '@angular/router';
-import { QuestionComponent } from './components/question-component/question-component.component';
-import { SearchComponent } from './components/search/search.component';
-import { QuestionAnswersComponent } from './components/question-answers/question-answers.component';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { TagQuestionsComponent } from './components/tag-questions/tag-questions.component';
+import { QuestionComponent } from './components/Stack_Overflow/question-component/question-component.component';
+import { SearchComponent } from './components/Stack_Overflow/search/search.component';
+import { QuestionAnswersComponent } from './components/Stack_Overflow/question-answers/question-answers.component';
+import { UserProfileComponent } from './components/Stack_Overflow/user-profile/user-profile.component';
+import { TagQuestionsComponent } from './components/Stack_Overflow/tag-questions/tag-questions.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -41,9 +41,9 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     RouterModule.forRoot([
-      { path: 'question', component: QuestionComponent, pathMatch: 'full' },
+      { path: 'stack-overflow/question', component: QuestionComponent, pathMatch: 'full' },
       { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
-      { path: 'tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
+      { path: 'stack-overflow/tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])

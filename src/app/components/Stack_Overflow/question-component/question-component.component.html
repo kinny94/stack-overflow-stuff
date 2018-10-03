@@ -5,7 +5,7 @@
     </div>
     <div class="col-12 tags">
       <span *ngFor="let tag of question.tags">
-        <a routerLink='/tag/questions' [queryParams]="{ tag: tag }">
+        <a routerLink='/stack-overflow/tag/questions' [queryParams]="{ tag: tag }">
           <button class="tag" mat-raised-button color="primary">{{ tag }}</button>
         </a>
       </span>

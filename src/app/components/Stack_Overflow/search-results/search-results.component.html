@@ -1,11 +1,11 @@
 <div *ngIf="searchResults">
   <div *ngFor="let item of searchResults.items">
-    <a  routerLink='/question' [queryParams]="{ question_id: item.question_id }"><mat-card class="card">
+    <a  routerLink='/stack-overflow/question' [queryParams]="{ question_id: item.question_id }"><mat-card class="card">
       <p>{{ item.title }}</p>
       <div class="row">
         <div class="col-10 col-xs-12">
           <span *ngFor="let tag of item.tags">
-              <a routerLink='/tag/questions' [queryParams]="{ tag: tag }">
+              <a routerLink='/stack-overflow/tag/questions' [queryParams]="{ tag: tag }">
                 <button class="tags click" color="accent" mat-raised-button>{{ tag }}</button>
               </a>
           </span>

@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { TagQuestionsService } from './../../services/tag-questions.service';
+import { TagQuestionsService } from './../../../services/tag-questions.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 

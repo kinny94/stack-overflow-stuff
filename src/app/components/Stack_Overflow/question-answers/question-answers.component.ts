@@ -1,4 +1,4 @@
-import { QuestionService } from './../../services/question.service';
+import { QuestionService } from './../../../services/question.service';
 import { map, switchMap, catchError } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, Input } from '@angular/core';

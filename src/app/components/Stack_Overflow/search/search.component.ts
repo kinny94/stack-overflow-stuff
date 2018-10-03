@@ -1,4 +1,4 @@
-import { SearchService } from './../../services/search.service';
+import { SearchService } from './../../../services/search.service';
 import { Observable } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
