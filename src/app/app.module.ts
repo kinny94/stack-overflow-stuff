@@ -1,5 +1,5 @@
-import { UserProfileService } from './services/user-profile.service';
-import { QuestionService } from './services/question.service';
+import { UserProfileService } from './services/stack-overflow-services/user-profile.service';
+import { QuestionService } from './services/stack-overflow-services/question.service';
 import { MaterialModule } from './material_modules/material_modules';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -10,13 +10,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
 import { SearchResultsComponent } from './components/Stack_Overflow/search-results/search-results.component';
-import { SearchService } from './services/search.service';
+import { SearchService } from './services/stack-overflow-services/search.service';
 import { RouterModule, Routes } from '@angular/router';
 import { QuestionComponent } from './components/Stack_Overflow/question-component/question-component.component';
 import { SearchComponent } from './components/Stack_Overflow/search/search.component';
 import { QuestionAnswersComponent } from './components/Stack_Overflow/question-answers/question-answers.component';
 import { UserProfileComponent } from './components/Stack_Overflow/user-profile/user-profile.component';
 import { TagQuestionsComponent } from './components/Stack_Overflow/tag-questions/tag-questions.component';
+import { GithubSearchComponent } from './components/Github/github-search/github-search.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -32,7 +33,8 @@ const appRoutes: Routes = [
     SearchComponent,
     QuestionAnswersComponent,
     UserProfileComponent,
-    TagQuestionsComponent
+    TagQuestionsComponent,
+    GithubSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -44,6 +46,7 @@ const appRoutes: Routes = [
       { path: 'stack-overflow/question', component: QuestionComponent, pathMatch: 'full' },
       { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
       { path: 'stack-overflow/tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
+      { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])

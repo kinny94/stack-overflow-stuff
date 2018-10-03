@@ -1,5 +1,5 @@
 import { map } from 'rxjs/operators';
-import { UserProfileService } from './../../../services/user-profile.service';
+import { UserProfileService } from '../../../services/stack-overflow-services/user-profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 

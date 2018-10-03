@@ -1,5 +1,5 @@
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService } from './../../../services/question.service';
+import { QuestionService } from '../../../services/stack-overflow-services/question.service';
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 

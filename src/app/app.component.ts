@@ -1,5 +1,5 @@
-import { SearchService } from './services/search.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  constructor( ) {}
+  constructor( private router: Router ) {}
+  themeClass = '';
 
+  ngOnInit() {
+    this.router.events.subscribe(( val ) => {
+      if ( val && val['url'] !== undefined ) {
+        const route = val['url'].split('/')[1];
+        if ( route === 'stack-overflow' ) {
+          this.themeClass = 'stack-overflow';
+        } else if ( route === 'github' ) {
+          this.themeClass = 'github';
+        }
+      }
+    });
+  }
 }
 
