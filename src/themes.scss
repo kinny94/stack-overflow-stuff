@@ -3,14 +3,16 @@
 
 $custom-primary: mat-palette($mat-deep-purple);
 $custom-accent: mat-palette($mat-pink);
-
 $custom-theme: mat-light-theme($custom-primary, $custom-accent);
 
 
 $github-primary: mat-palette( $mat-pink );
 $github-accent: mat-palette( $mat-indigo );
-
 $github-theme: mat-light-theme( $github-primary, $github-accent );
+
+$youtube-primary: mat-palette( $mat-red );
+$youtube-accent: mat-palette( $mat-lime );
+$youtube-theme: mat-light-theme( $youtube-primary, $youtube-accent );
 
 .stack-overflow{
   @include angular-material-theme($custom-theme);
@@ -18,7 +20,8 @@ $github-theme: mat-light-theme( $github-primary, $github-accent );
 
 .github{
   @include angular-material-theme($github-theme);
-  // @include mat-form-field-theme($github-theme); // Form-Field theme
-  // @include mat-input-theme($github-theme);
+}
 
+.youtube{
+  @include angular-material-theme($youtube-theme);
 }

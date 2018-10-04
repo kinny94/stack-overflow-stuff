@@ -20,6 +20,8 @@ export class AppComponent implements OnInit {
           this.themeClass = 'stack-overflow';
         } else if ( route === 'github' ) {
           this.themeClass = 'github';
+        } else if ( route === 'youtube' ) {
+          this.themeClass = 'youtube';
         }
       }
     });

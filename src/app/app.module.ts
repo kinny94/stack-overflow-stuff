@@ -1,3 +1,4 @@
+import { YoutubeSearchService } from './services/youtube-services/youtube-search.service';
 import { GetUsersService } from './services/github-services/get-users.service';
 import { UserProfileService } from './services/stack-overflow-services/user-profile.service';
 import { QuestionService } from './services/stack-overflow-services/question.service';
@@ -23,6 +24,7 @@ import { GithubSearchResultsComponent } from './components/Github/github-search-
 import { GithubUserComponent } from './components/Github/github-user/github-user.component';
 import { GithubSelectedUserService } from './services/github-services/github-selected-user.service';
 import { GithubUserReposService } from './services/github-services/github-user-repos.service';
+import { YoutubeSearchComponent } from './components/Youtube/youtube-search/youtube-search.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -41,7 +43,8 @@ const appRoutes: Routes = [
     TagQuestionsComponent,
     GithubSearchComponent,
     GithubSearchResultsComponent,
-    GithubUserComponent
+    GithubUserComponent,
+    YoutubeSearchComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +58,7 @@ const appRoutes: Routes = [
       { path: 'stack-overflow/tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
       { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
       { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
+      { path: 'youtube', component: YoutubeSearchComponent, pathMatch: 'full'},
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])
@@ -65,7 +69,8 @@ const appRoutes: Routes = [
     UserProfileService,
     GithubSelectedUserService,
     GetUsersService,
-    GithubUserReposService
+    GithubUserReposService,
+    YoutubeSearchService
   ],
   bootstrap: [AppComponent]
 })
