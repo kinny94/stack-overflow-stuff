@@ -10,8 +10,6 @@ export class YoutubeSearchResultsComponent implements OnInit {
   @Input() searchResults;
   constructor() { }
 
-  ngOnInit() {
-    console.log( this.searchResults );
-  }
+  ngOnInit() {}
 
 }

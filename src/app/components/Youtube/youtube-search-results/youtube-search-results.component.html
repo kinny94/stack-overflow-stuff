@@ -1,7 +1,13 @@
 <div class="container">
-  <div *ngIf="searchResults">
-    <div ngFor="let result of searchResults">
-      <p>{{ result }}</p>
-    </div>
-  </div>
+  <mat-grid-list *ngIf="searchResults" cols="3" rowHeight="1:1">
+    <mat-grid-tile *ngFor="let result of searchResults">
+      <mat-card>
+        <img  src="{{ result.snippet.thumbnails.medium.url }}" class="img-fluid"/>
+        <div>
+            <p><strong>{{ (result.snippet.title.length>20)? (result.snippet.title | slice:0:20)+'..':(result.snippet.title) }}</strong></p>
+            <h6 class="float-right"><strong>{{ result.snippet.channelTitle }}</strong></h6>
+        </div>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
