@@ -33,9 +33,7 @@ export class YoutubeSearchComponent implements OnInit {
 
   constructor( private youTubeGetVideosService: YoutubeSearchService ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onChange( event ) {
 
@@ -53,7 +51,13 @@ export class YoutubeSearchComponent implements OnInit {
   }
 
   getSearchResults( searchQuery ) {
-    this.youTubeGetVideosService.getYoutTubeVideos( searchQuery );
+    this.youTubeGetVideosService.getYoutTubeVideos( searchQuery ).pipe(
+      map( (data: any)  => data.items )
+    ).subscribe(
+      data => {
+        this.searchResults = data;
+        console.log( this.searchResults );
+      });
   }
 
 }

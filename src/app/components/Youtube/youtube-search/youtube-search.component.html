@@ -7,6 +7,6 @@
     </form>
   </div>
   <div class="container">
-    <app-github-search-results [searchResults]="searchResults | async"></app-github-search-results>
+    <app-youtube-search-results *ngIf="searchResults" [searchResults]="searchResults"></app-youtube-search-results>
   </div>
 </div>

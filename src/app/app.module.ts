@@ -25,6 +25,7 @@ import { GithubUserComponent } from './components/Github/github-user/github-user
 import { GithubSelectedUserService } from './services/github-services/github-selected-user.service';
 import { GithubUserReposService } from './services/github-services/github-user-repos.service';
 import { YoutubeSearchComponent } from './components/Youtube/youtube-search/youtube-search.component';
+import { YoutubeSearchResultsComponent } from './components/Youtube/youtube-search-results/youtube-search-results.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -44,7 +45,8 @@ const appRoutes: Routes = [
     GithubSearchComponent,
     GithubSearchResultsComponent,
     GithubUserComponent,
-    YoutubeSearchComponent
+    YoutubeSearchComponent,
+    YoutubeSearchResultsComponent
   ],
   imports: [
     BrowserModule,
