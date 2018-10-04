@@ -22,6 +22,7 @@ import { GithubSearchComponent } from './components/Github/github-search/github-
 import { GithubSearchResultsComponent } from './components/Github/github-search-results/github-search-results.component';
 import { GithubUserComponent } from './components/Github/github-user/github-user.component';
 import { GithubSelectedUserService } from './services/github-services/github-selected-user.service';
+import { GithubUserReposService } from './services/github-services/github-user-repos.service';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     QuestionService,
     UserProfileService,
     GithubSelectedUserService,
-    GetUsersService
+    GetUsersService,
+    GithubUserReposService
   ],
   bootstrap: [AppComponent]
 })

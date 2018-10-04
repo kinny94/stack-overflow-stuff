@@ -1,0 +1,36 @@
+mat-progress-bar{
+  margin-top: 35%;
+}
+
+mat-card{
+  width: 100%;
+  margin-top: 2%;
+}
+
+mat-card button{
+  margin-left: 1%;
+}
+
+mat-card:hover{
+  cursor: pointer;
+  transition: all .2s ease-in-out;
+  transform: scale(1.01);
+  background-color: #e91e63;
+  color: white;
+}
+
+mat-card:hover button{
+  background-color: white;
+  color: #e91e63;
+}
+
+mat-card:hover .link{
+  background-color: #42A5F5;
+  color: white;
+}
+
+.snackbar{
+  background-color: black;
+  color: #e91e63;
+}
+
