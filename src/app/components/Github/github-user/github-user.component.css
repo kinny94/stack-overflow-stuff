@@ -15,13 +15,13 @@ mat-card:hover{
   cursor: pointer;
   transition: all .2s ease-in-out;
   transform: scale(1.01);
-  background-color: #e91e63;
+  background-color: #009688;
   color: white;
 }
 
 mat-card:hover button{
   background-color: white;
-  color: #e91e63;
+  color: #009688;
 }
 
 mat-card:hover .link{
@@ -31,6 +31,6 @@ mat-card:hover .link{
 
 .snackbar{
   background-color: black;
-  color: #e91e63;
+  color: #009688;
 }
 
