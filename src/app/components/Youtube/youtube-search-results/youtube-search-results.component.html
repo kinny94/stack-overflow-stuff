@@ -5,7 +5,7 @@
         <img  src="{{ result.snippet.thumbnails.medium.url }}" class="img-fluid"/>
         <div>
             <p><strong>{{ (result.snippet.title.length>30)? (result.snippet.title | slice:0:30)+'....':(result.snippet.title) }}</strong></p>
-            <h6 class="float-right"><strong>{{ result.snippet.channelTitle }}</strong></h6>
+            <h6><strong>Channel: {{ result.snippet.channelTitle }}</strong></h6>
         </div>
       </mat-card>
     </mat-grid-tile>
