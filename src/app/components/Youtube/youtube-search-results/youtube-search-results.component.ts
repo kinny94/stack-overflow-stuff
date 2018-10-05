@@ -15,11 +15,14 @@ export class YoutubeSearchResultsComponent implements OnInit {
   ngOnInit() {}
 
   openDialog( videoId ) {
+
    const href = `https://www.youtube.com/embed/${ videoId }`;
-   const link = this.sanitize.bypassSecurityTrustResourceUrl( link );
+   console.log( href );
+   const link = this.sanitize.bypassSecurityTrustResourceUrl( href );
+   console.log(link );
     const dialogRef = this.dialog.open(YoutubeDialogComponent, {
       width: '80%',
-      height: '80%',
+      height: '57%',
       data: { link }
     });
 
