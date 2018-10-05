@@ -8,12 +8,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule, Routes } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
 import { SearchResultsComponent } from './components/Stack_Overflow/search-results/search-results.component';
 import { SearchService } from './services/stack-overflow-services/search.service';
-import { RouterModule, Routes } from '@angular/router';
 import { QuestionComponent } from './components/Stack_Overflow/question-component/question-component.component';
 import { SearchComponent } from './components/Stack_Overflow/search/search.component';
 import { QuestionAnswersComponent } from './components/Stack_Overflow/question-answers/question-answers.component';
@@ -25,7 +25,10 @@ import { GithubUserComponent } from './components/Github/github-user/github-user
 import { GithubSelectedUserService } from './services/github-services/github-selected-user.service';
 import { GithubUserReposService } from './services/github-services/github-user-repos.service';
 import { YoutubeSearchComponent } from './components/Youtube/youtube-search/youtube-search.component';
-import { YoutubeSearchResultsComponent } from './components/Youtube/youtube-search-results/youtube-search-results.component';
+import {
+   YoutubeSearchResultsComponent,
+   YoutubeDialogComponent
+  } from './components/Youtube/youtube-search-results/youtube-search-results.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -46,7 +49,8 @@ const appRoutes: Routes = [
     GithubSearchResultsComponent,
     GithubUserComponent,
     YoutubeSearchComponent,
-    YoutubeSearchResultsComponent
+    YoutubeSearchResultsComponent,
+    YoutubeDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +68,9 @@ const appRoutes: Routes = [
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])
+  ],
+  entryComponents: [
+    YoutubeDialogComponent
   ],
   providers: [
     SearchService,
