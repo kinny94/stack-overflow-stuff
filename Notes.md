@@ -36,7 +36,17 @@ A process that speeds up application load time by splitting the application into
 * Pipe
 A class which is preceded by the @Pipe{} decorator and which defines a function that transform input values to output values for display in a view. Angular defines various pipes and you can define new pipes.
 
+* Provider
+An object that implements one of the provider interface. A provider object defines how to obtain an injectable dependency associated with a DI token.
 
+* Reactive forms
+A framework for building Angular forms through the code in a component.
+
+* Scoped Package
+A way to group related npm packages. NgModules are delivered within the scoped packages whose names begin with the Angular scope name ```@angular```.
+
+* Service
+In angular, a class with the @Injectable() decorator that encapsulates non-UI Logic and code that can be reused across an application
 
 
 ### Javascript Modules 
@@ -73,6 +83,14 @@ NgModules are class decorated with @NgModules. The @NgModules decorator's `impor
   })
   export class AppModule { }
 ```
+NgModules configure the injector and the compiler and help organize related things together.
+An NgModule is a class marked by the @NgModule decorator. @NgModule takes a metadata object that describes how to compile a component's template and how to create an injector at runtime. It identifies the module's own components, directives, and pipes, making some of them public through the `exports` property, so that external components can use them.
+
+NgModule metadata does the following:
+1. Describes which components, directives and pipes belongs to the module.
+2. Makes some of those components, directives and pipes public so that other module's component templates can use them.
+3. Imports other modules with the components, directives, and pipes that components in the current module need.
+4. Provides services that the other application components can use.
 
 * Declarable Classes: These are the classes that you can add to a module's `declarations` list. They are the only classes that you can add to the declarations. 
 
@@ -84,3 +102,44 @@ The NgModule classes differ from JavaScript modules in the following key ways:
 
 ### Bootstrapping
 An NgModule describes how the application parts fit together. Every applciation has atleast one Angular module, the root module that you bootstrap to launch the application. By convention, it usually called AppModule.
+
+### Entry Components
+An entry component is any component is any component that Angular loads imperatively, by type. You specify an entry component by bootstrapping it in an NgModule. or including it in a routing defination.
+
+There are two main kinds of entry components
+1. The bootstrapped root component.
+2. A component you specify in a route defination.
+
+#### A Bootstrapped Entry Component 
+A bootstrapped entry component is an entry component that angular loads into DOM during the bootstrap process. OTher entry components are loaded dynamically by other means.
+A bootstrapped component is necessarily an entry component because bootstrapping is an imperative process, this it needs to have an entry component.
+
+#### A Routed Entry Component 
+A route defination refers to a component by its type with `component: CustomerListComponent`
+All router component must be entry components. Because this would require you to add the component in two places ( router and `entryComponents` ) the compiler is smart enough to recognize that this is a router defination and automatically add the router component into `entryComponent`.
+
+For production apps you want to load the smallest code possible. The code should contain only classes that you actually need and exclude components that are never used. For this reason, angular compiler only generates code for the components which are reachable from the `entryComponents`. This means adding more refenreces to `@NgModule.declarations` does not imply that they will necessarily be included in the final bundle. 
+
+### Features Modules
+Features modules are NgModules for the purpose of organizing code.
+Feature module is an organization best practice, as opposed to a concept of the core angular API. A feature module delivers a cohesive set of functionality focused on a specific application need such as a user workflow, routing, or forms. While you can do everything withhin the root module, feature modules help you partition the app into focused areas. A feature module collaborates with the root module and with other modules throught the services it provides and the components, directives, and pipe that it shares.
+
+### Providers
+A provider is an instruction to the DI System on how to obtain a value for a dependency. Most of the time, these dependencies are services that you create and provide.
+When you add a service provider to the root application injector, its available thoroughout the application. Additionally these providers are also available to all the classes in the app as long they have the lookup token.
+You should always provide your service in the root injector unless there is a case where you want the servuce to be available only if the consumer imports a particular @NgModule.
+
+* Limiting provider scope by lazy loading modules
+In the basic CLI generated app, modulesare eagerly loaded which means that they're all loaded when the app launches. Angular uses an injector system to make things available between modules. In an eagerly loaded app, the root application injector makes all of the providers in all modules available throughout the app. This behaviour necessarily changes when you use lazy loading. Lazy loading is when you load modules only when you need them: for example, when routing. They aren't loaded right away like with eagerly loaded module. This means that any services listed in their provider arrays aren't available because the root injector doesn't know about these modules.
+When the angular router lazy-loads a module it creates a new injector. This injector is a child of the root application injector. Imagine a tree of injectors; there is a single root injector and then a child injector for each lazy loaded module. The router adds all of the providers from the root injector to the child injector. When the router creates a component within the lazy-loaded context, Angular prefers service instances created from these providers to the service instances of the application root injector. Any component that lazy loaded a module's context, such as by router navigation, gets the local instance of the service, not the instance in the root aplication injector. Components in external modules continue to receive the instance created for the application root.
+
+* Limiting provider scope with components
+Another way to limit provider scope is by adding the service you want to limit to the component's `providers` array. Component providers and NgModule providers are inderpendent of each other. This method is helpful for when to eagerly load a module that needs a service all to itself. Providing a service in the components limits the service only to that component.
+
+```
+@Component({
+/* . . . */
+  providers: [UserService]
+})
+
+```
