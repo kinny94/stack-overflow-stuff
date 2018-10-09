@@ -166,3 +166,58 @@ There are three main steps to setup lazy loaded feature module.
 
 * Set up an app
 > `ng new customer-app --routing`
+
+This creates an app called  `customer-app` and the `--routing` flag generates a file called `app-routing.module.ts` which is one of the files you need for setting up lazy loading for your feature module.
+
+### Dependency Injection
+Dependency injection is an important application design pattern. Angular has its own DI framework, which is tyoically used in the design of angular applciation to increate their efficiency and modularity. Dependencies are services or objects that a class needs to perform its function. DI is a coding pattern in which a class asks for dependencies from external sources rather than creating them itself. In Angular, DI framework provides declared dependencies to a class when that class is instantiated. 
+
+### Cheat Sheet
+
+* Boostrapping
+
+`platformBrowserDynamic().bootstrapModule( AppModule )` - Bootstraps the app, using the root component from the specified `NgModule`.
+
+* NgModules
+
+`@NgModules({ declarations: ..., imports: ..., exports: ..., providers: ..., bootstrap: ...})` - Defines a module that contains components, directives, pipes, and providers.
+
+`declarations[ MyRedComponent, MyBlueComponent] - List of components, directives, and pipes that belong to this module.`
+
+`imports: [ BrowserModule, SomeOtherModule]` - List of modules to import into this module. Everything  from the imported modules is available to `declarations` of this module.
+
+`exports: [MyRedComponent, MyDatePipe]` - List of components, directives, and pipes visible to modules that import this module.
+
+`providers: [MyService: { provide: ... }]` - List of dependency injection providers visible to both to the contents of this module and to importers of this module.
+
+`entryComponents: [ SomeComponent, OtherComponent ]` - List of components not referenced in any reachable template, for example dynamically created from code. 
+
+`bootstrap: [ MyAppComponent ]` - List of components to bootstrap when this module is bootstraped.
+
+* Template Syntax
+
+`<input [value]="firstname">` - Binds the property `value` to the result of expression `firstname`.
+
+`<div [attr.role]="myAriaRole">` - Binds the attribute `role` to the result expression `myAriaRole`.
+
+`<div [class.extra-sparkle]="isDelightful">` - Binds the presence of the CSS class `extra-sparkle` on the element to the truthiness of the expression `isDelightful`.
+
+`<div [style.width.px]="mySize">` - Binds the style property `width` to the result of expression `mySize` in pixels. Units are optional.
+
+`<button (click)="readRainbow($event)">` - calls method `readRainbow` when a click event is triggered on this button element ( or its children ) and passes in the event object.
+
+`<div title="Hello {{ ponyName }}">` - Binds a property to an interpolated string, for eg, "Hello ponyNameValue".
+
+`<p>Hello {{ ponyName }} </p>` - Binds text content to an interpolated string, for example, "Hello Seabiscuit".
+
+`<my-cmp [(title)]="name">` - Sets up two-way binidnig. Equivalent to ` <my-cmp [title]="name" (titleChange)="name=$event">`.
+
+`<video #movieplayer ...><button (click)="movieplayer.play()"></button></video>` - Creates a local variable movieplayer that provides access to the video element instance in data-binding and event-binding expressions in the current template.
+
+`<p *myUnless="myExpression">...</p>`: The `*` symbol turns the current element into an embedded template. Equivalent to: `<ng-template [myUnless]="myExpression"><p>...</p></ng-template>`
+
+`<p>Card No.: {{cardNumber | myCardNumberFormatter}}</p>`: Transforms the current value of expression cardNumber via the pipe called `myCardNumberFormatter`.
+
+`<p>Employer: {{employer?.companyName}}</p>`:The safe navigation operator `(?)` means that the employer field is optional and if `undefined`, the rest of the expression should be ignored.
+
+
