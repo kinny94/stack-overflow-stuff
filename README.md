@@ -220,4 +220,42 @@ Dependency injection is an important application design pattern. Angular has its
 
 `<p>Employer: {{employer?.companyName}}</p>`:The safe navigation operator `(?)` means that the employer field is optional and if `undefined`, the rest of the expression should be ignored.
 
+* Built-in Directives
 
+`<section *ngIf="showsection">`:  Removes or recreates a porttion of the DOM tree based on the `showSection` expression.
+
+`<li *ngFor="let item of list">`: Turns the li element into a template, and uses that to instantiate a view for each item in list. 
+
+`<div [ngSwitch]="conditionExpression">`: Conditionally swaps the contents of the div by selecting one of the embedded templates based on the current value of conditionExpression.
+
+`<ng-template [ngSwitchCase]="case1Exp">...</ng-template>`
+
+`<ng-template ngSwitchCase="case2LiteralString">...</ng-template>`
+
+`<ng-template ngSwitchDefault>...</ng-template>`
+
+`</div>`
+
+`<div [ngClass]="{'active': isActive, 'disabled': isDisabled}">`: Binds the presence of CSS classes on the element to the truthiness of the associated map values. The right-hand expression should return `{class-name: true/false}` map.
+
+`<div [ngStyle]="{'property': 'value'}">`:  Allows you to assign styles to an HTML element using CSS. You can use CSS directly, as in the first example
+
+`<div [ngStyle]="dynamicStyles()">`         , or you can call a method from the component.
+
+* Class field decorators for directives and components
+
+`@Input() my Property` : Declares an input property that you can update via property binding.
+
+`Output() myEvent = new EventEmitter()` : Declares an output property that fires events that you can subscribe to with an event binding.
+
+`@HostBinding('class.valid') isValid` : Binds a host element property to a directive property.
+
+`@HostListener('click`, ['$event']) onClick(e){..}` : Subscribe the host element event (click) with a directive method (onclick). optionally passing an argument($event)
+
+`@ContentChild( myPredicate ) myChildComponent` : Binds the first result of the component content query (`myPredicate`) to a property (`myChildComponent`) of the class.
+
+`@ContentChildren( myPredicate ) myChildComponents` : Binds the results of the component content query (`myPredicate`) to a property (`myChildComponent`) of the class.
+
+`@ViewChildmyPredicate) myChildComponent` : Binds the first result of the component view query (`myPredicate`) to a property (`myChildComponent`) of the class. Not available for directives.
+
+`@ViewChildren(myPredicate) myChildComponents`: Binds the result of the componennt view query to a property (`mychildComponents`) of the class. Not available for directives.
