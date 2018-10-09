@@ -290,3 +290,83 @@ Dependency injection is an important application design pattern. Angular has its
 
 `{ provide: MyValue, useValue: 41 }` : Sets or overrides the providers for `MyValue` to the value 41.
 
+
+* Router and Navigation
+
+`const routes: Routes = [ {path: '', component: HomeComponent}]` : Configures routes for the application. Supports static, parameterized, redirect, and wildcard routes. Also supports custom route data and resolve.
+
+`<router-outlet></router-outlet>` : Marks the location to load the component of the active route.
+
+`<a [routerLink]="[ '/path', routeParam ]">` : Creates a link to a different view based on a route instruction consisting of a route path, required and optional parameters, query parameters, and a fragment. To navigate to a root route, use the / prefix; for a child route, use the ./prefix; for a sibling or parent, use the ../ prefix.
+
+`<a [routerLink]="[ '/path' ]" routerLinkActive="active">`: The provided classes are added to the element when the routerLink becomes the current active route.
+
+**CanActivate** - An interface for defining a class that the router should call first to determine if it should activate this component. Should return a boolean or an Observable/Promise that resolves to a boolean.
+
+```
+class CanActivateGuard implements CanActivate {
+canActivate(
+route: ActivatedRouteSnapshot,
+state: RouterStateSnapshot
+): Observable<boolean>|Promise<boolean>|boolean { ... }
+}
+
+{ path: ..., canActivate: [CanActivateGuard] }
+```
+
+**CanDeactivate** - An interface for defining a class that the router should call first to determine if it should deactivate this component after a navigation. Should return a boolean or an Observable/Promise that resolves to a boolean.
+
+```
+class CanDeactivateGuard implements CanDeactivate<T> {
+canDeactivate(
+component: T,
+route: ActivatedRouteSnapshot,
+state: RouterStateSnapshot
+): Observable<boolean>|Promise<boolean>|boolean { ... }
+}
+
+{ path: ..., canDeactivate: [CanDeactivateGuard] }
+  
+```
+
+**CanActivateChild** - An interface for defining a class that the router should call first to determine if it should activate the child route. Should return a boolean or an Observable/Promise that resolves to a boolean.
+
+```
+class CanActivateChildGuard implements CanActivateChild {
+canActivateChild(
+route: ActivatedRouteSnapshot,
+state: RouterStateSnapshot
+): Observable<boolean>|Promise<boolean>|boolean { ... }
+}
+
+{ path: ..., canActivateChild: [CanActivateGuard],
+children: ... }
+
+```
+
+**Resolve** - An interface for defining a class that the router should call first to determine if it should activate the child route. Should return a boolean or an Observable/Promise that resolves to a boolean.
+
+```
+class ResolveGuard implements Resolve<T> {
+resolve(
+route: ActivatedRouteSnapshot,
+state: RouterStateSnapshot
+): Observable<any>|Promise<any>|any { ... }
+}
+
+{ path: ..., resolve: [ResolveGuard] }
+
+```
+
+**CanLoad** - An interface for defining a class that the router should call first to check if the lazy loaded module should be loaded. Should return a boolean or an Observable/Promise that resolves to a boolean.
+
+```
+class CanLoadGuard implements CanLoad {
+canLoad(
+route: Route
+): Observable<boolean>|Promise<boolean>|boolean { ... }
+}
+
+{ path: ..., canLoad: [CanLoadGuard], loadChildren: ... }
+
+```
