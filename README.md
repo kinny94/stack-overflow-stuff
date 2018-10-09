@@ -143,3 +143,26 @@ Another way to limit provider scope is by adding the service you want to limit t
 })
 
 ```
+
+### Singleton services
+* Providing a singleton services in Angular
+There are two ways to make a service a single in angular.
+* Declare that the service should be provided in the application root. 
+* Include the service in the AppModule or in a module that is only imported by the AppModule.
+
+Beginning with Angular 6.0, the preferred way to create a singleton services is to specify on the service that is hould be provides in the application root. This is done by setting `providedIn` to `root` on the service's `@Injectable` decorator
+
+* for Root()
+If a module provides both providers and declarations then loading it in a child injector such as a route, would duplicate the provider instances. The duplication of providers would cause issues as they would shadow the root instances, which are probably meant to be singletons. For this reason, angular provides a way to sepatrate providers out of the module so that the same module can be imported into the root module with `providers` and child modules without providers.
+
+1. Create a static method  `forRoot()` on the module.
+2. Place the providers into the  `forRoot()` method as follows.
+
+### Lazy Loading
+There are three main steps to setup lazy loaded feature module.
+1. Create the feature module.
+2. Create the feature module's routing module.
+3. Configure the routes.
+
+* Set up an app
+> `ng new customer-app --routing`
