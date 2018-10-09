@@ -259,3 +259,34 @@ Dependency injection is an important application design pattern. Angular has its
 `@ViewChildmyPredicate) myChildComponent` : Binds the first result of the component view query (`myPredicate`) to a property (`myChildComponent`) of the class. Not available for directives.
 
 `@ViewChildren(myPredicate) myChildComponents`: Binds the result of the componennt view query to a property (`mychildComponents`) of the class. Not available for directives.
+
+
+* Directive and component change detection and lifecycle hooks
+
+`constructor( myService: MyService ){}` : Called before the any other lifecycle hook. Ude it to inject dependencies, but avoid any serious work.
+
+`ngOnChanges( changeRecord ){}` : Called after every change to input properties and before processing content or child views.
+
+`ngOnInit(){}`: Called after the contructor, initilizing input properties, and the first call to `ngOnChanges`.
+
+`ngDoCheck(){}` : Called everytime that the input properties of a component or a directive are unchecked. Use it to extend change detection by perfomring a custom check.
+
+`ngAfterContentInit(){}` : called after ngOnInit when the component's r directive's content has been inititialzed.
+
+`ngAfterContentChecked(){}` : called after every check of the component's or directive's content.
+
+`ngAfterViewInit(){}` : Called after `ngAfterContentInit` when the component's views and child views / the view that a directive is in has been initialized.
+
+`ngAfterViewChecked(){}`: Called after every check of the component's views and child views/ the view that a directive is in.
+
+`ngOnDestroy(){}` : Called once, before the instance is destroyed.
+
+
+* Dependency Injection configuration
+
+`{ provide: MySerive, useClass: MyMockService }` : Sets or overrides the provides for `MyService` to the `MyMockService` class.
+
+`{ provide: MyService, useFactory: myFactory }` : Sets or overrides the provider for MyService to the myFacorty function.
+
+`{ provide: MyValue, useValue: 41 }` : Sets or overrides the providers for `MyValue` to the value 41.
+
