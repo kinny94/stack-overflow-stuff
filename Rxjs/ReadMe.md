@@ -183,3 +183,66 @@ RxJS introduces Observables, a new push system for javascript. An Observable is 
 * A **generator** is a lazily evaluated computation that synchronously return zero to infinite values on iteration.
 * A **Promise** is a computation that may or may not eventually return a single value.
 * An **Observable** is a  lazily evaluated computation that can synchronously or asynchronously return zero to infinite values from the time it's invoked onwards.
+
+#### Observable as generalizations of functions
+
+Contrary to popular claims, Observables are not like EventEmitters not are they like Promises for mulitple values. Obervables may act like EventEmitters in some cases, namely when they are multicasted using RxJs Subjects, but usually they don't act like eventEmitters. Observables are liek functions with zero argument, but generalize those to allow multiple values.
+
+```
+var foo = Rx.Observable.create(( observer ) => {
+  console.log('Hello')
+  observer.next( 42 );
+});
+
+foo.subscribe((x) => {
+  onsole.log(x);
+})
+
+foo.subscribe((y) => {
+  console.log(y);
+})
+```
+
+Output:
+```
+"Hello"
+42
+"Hello"
+42
+```
+
+This happens because both functions and observables are lazy computations. If you dont call the function, the `console.log('Hello')` won't happen. Also with Observables, if you don't "call" it, the `console.log('Hello')` won't happen. Plus, "calling" or "subscribing" is an isolated operation: two function calls trigger two separate side effects, and two Observables subscribes trigger two separate side effects. As Opposed toe EventEmitters which share the side effects and have eager execution regardless of the existence of subscribers, Observables have no shared execution and are lazy.
+
+*What is the difference between an Observable and a function? **Observables can "return" mulitple values over time**, something which functiona cannot.*
+
+Funtions can return only one value. Observables, how ever can do this.
+```
+var foo  = Rx.Obsevables.create(( observer ) => {
+  console.log('Hello');
+  observer.next(42);
+  observer.next(100); // return another value
+  observer.next(200); // return yet another
+  setTimeout(() => {
+    observer.next(300); // async
+  }, 3000)
+});
+
+console.log('before');
+foo.subscribe((x) => {
+  console.log(x);
+});
+console.log('after');
+```
+Output:
+
+```
+"before"
+"Hello"
+42
+100
+200
+"after"
+300
+```
+* function.call() means "give me one value synchronously".
+* Observable.subscribe() means "give me any amount of values, either synchronously or asynchronously
