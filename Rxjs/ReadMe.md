@@ -307,3 +307,68 @@ var observable = Rx.Observable.create( function subscribe( observer )){
   observer.next(4);  // Is not delivered because it would violate the contract
 });
 ```
+
+It is a good idea to wrap any code in `subscribe` with `try/catch` block that will deliver an Error notification if it catches an exception:
+
+```
+var observable = Rx.Observable.create( function subscribe( observer ){
+  try{
+    observer.next(1);
+    observer.next(2);
+    observer.next(3);
+    observer.complete();
+  }catch( err ){
+    observer.error( err );
+  }
+})
+```
+
+#### Disposing Observable Executions
+
+Because Observable Executions may be infinite, and it's common for an Observer to want to abort execution in finite time, we need an API for cancelling an execution . Since each execution is exclusive to one observer only, once the Observer is done receiving values, it has to have a way to stop the execution, in order to avoid wasting compution power or memory resources. When `observable.subscribe` is called, the observer gets attached to the newly create Observable execution. This call also returns an object, the `subscrition`.
+
+`var subscription= observable.subscrie( x => console.log( x ));`
+
+The subscription representsthe ongoing execution, and has a minimal API which allows you to cancel the execution. with `subscription.unsubscribe` you can cancel the ongoing execution.
+
+```
+var observable = Rx.Observable.from([ 10, 20, 30 ]);
+var subscription = observable.subscribe( x => console.log(x));
+subscription.unsubscribe();
+```
+
+*When you subscribe, you get back a subscription, which represents the ongoing execution. Just call unsubscrieb() to cancel the execution.*
+
+Each observable must define how to dispose resouces of that execution when  we create the Observable using `create()`. You can dot hat by returning a custom `unsubscribe` function from within `function subscribe()`.
+
+```
+var observable = Rx.Observable.create( function subscribe( observer ){
+  var intervalId = setInterval(() => {
+    observer.next('hi);
+  }, 1000);
+
+
+  return function unsubscribe(){
+    clearInterval( intervalID );
+  }
+})
+```
+
+Just like observable.subscribe resembles `Observable.create(function subscribe() {...})`, the unsubscribe we return from subscribe is conceptually equal to `subscription.unsubscribe`. In fact, if we remove the ReactiveX types surrounding these concepts, we're left with rather straightforward JavaScript.
+
+```
+function subscribe(observer) {
+  var intervalID = setInterval(() => {
+    observer.next('hi');
+  }, 1000);
+
+  return function unsubscribe() {
+    clearInterval(intervalID);
+  };
+}
+
+var unsubscribe = subscribe({next: (x) => console.log(x)});
+
+// Later:
+unsubscribe(); // dispose the resources
+```
