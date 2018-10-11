@@ -372,3 +372,70 @@ var unsubscribe = subscribe({next: (x) => console.log(x)});
 // Later:
 unsubscribe(); // dispose the resources
 ```
+
+<hr />
+
+## Observer
+An observer is a consumer of vlaues delivered by an Observable. Observers a simply a set of callbacks, one for each type of notification delivered by the Observable: `next`, `error`, and `complete`. example
+
+```
+var observer = {
+  next: x => console.log('Observer got a next value: ' + x ),
+  error: err =>  console.log('Observer got an error : ' + err ),
+  complete: () => console.log('Observer got a complete notification'),  
+};
+```
+*Observers are just objects with three callbacks, one for each type of notification that an observable may deliver.*
+
+Observers in Rxjs may also be partial. If you don't provide one of the callbacks, the execution of the observable will still happend normally, except some of types of notifications will be ignored because they don't have corresponding callback in the observer. When subscribing to an observable you may also just provide the callbacks as an arguments, without being attached to an Observer object, for instance
+
+```
+observable.subscribe(x => console.log('Observer got a next value: ' + x));
+```
+
+Internally in `observable.subscribe`, it will create an observer object using the first callback argument as the `next` handler. All three types of callbacks may be provided as arguments:
+
+```
+observable.subscribe(
+  x => console.log('Observer got a next value: ' + x),
+  err => console.error('Observer got an error: ' + err),
+  () => console.log('Observer got a complete notification')
+);
+```
+
+<hr />
+
+## Subscription
+A subscription is an object that represents a disposable, resource, usually the execution of an observable. A Subscription has one important method, `unsubscribe`, that makes no argument and just disposed the resource help by the subscription. 
+
+*A Subscription essentially just has an unsubscribe() function to release resources or cancel observable executions.*
+
+Subscriptions can also  be put together, so that a call to an `unsubscribe()` of one subscription may unsubscribe mulitple subscriptions. 
+
+```
+var observable1 = Rx.observable.interval( 300 );
+var observable2 = Rx.observable.interval( 300 );
+
+var subscription = observable1. subscribe( x => console.log( 'first: ' +  x));
+var childSubscription = observable2.subscribe( x => console.log('second: ' + x ));
+
+subscription.add( childSubscription );
+
+setTimeout(() => {
+  subscription.unsubscribe();
+}, 1000);
+```
+*Subscription also have a `remove( otherSubscription )` method inorder to undo the adition of a child subscription.*   
+
+
+<hr />
+
+## Subject
+
+An Rxjs Subject is a special type of observable that allows values to be multicasted to many observers. While plain observables are uncast, subjects are multicast.
+
+*A Subject us like an observable, but can multicast to many observers. Subjects are like EventEmitters: they miantain a registry of many listeners.*
+
+**Every Subject is an observable** - Given a subject, you can subscribe to it, providing an observer, which will start receiving values normally. From the prespective of the observer, it cannot tell whether the observable execution is coming from a plain unicast Observable or a subject. Internally to the subject, subscribe does not invoke a new execution that delivers values. It simply registers the given observer in a list of observers, similarly to how `addListener` usually works in other libraries and language.
+
+**Every Subject is an Observer** - It is an object with the methods `next(v)`, `error(e)` and `complete()`. To feed a new value to the subject, just call the `next(value)`, and it will be multicasted to the observers registered to listen to the subject.
