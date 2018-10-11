@@ -246,3 +246,64 @@ Output:
 ```
 * function.call() means "give me one value synchronously".
 * Observable.subscribe() means "give me any amount of values, either synchronously or asynchronously
+
+### Anatomy of Observable
+Observables are created using `Rx.Observable.create` or a creation operation, are subscribed to with an Observer, execute to deliver `next`/`error`/`complete` notifications to the observer, and their execution may be disposed.
+
+Core Observables concerns:
+* Creating Observables
+* Subscribing Observables
+* Executing the Observables
+* Disposing Observables
+
+#### Creating Observables
+`Rx.observable.create` si an alias for the `Observable` constructor, and takes one argument: the `subscribe` function.
+
+```
+var observable = Rx.Observable.create(( observer ) => {
+  var id = setInterval(() => {
+    observer.next('hi');
+  }, 1000);
+})
+```
+
+*Observables can be created with create, but usually we use the so-called creation operators, like of, from, interval, etc.*
+
+#### Subscribing to Observables
+The Observable `observable` in the example can be *subscribed* to, like this:
+
+```
+observable.subscribe( x => console.log( x ));
+```
+
+Its not a conincidence that  `observable.subscribe` and `subscribe` in `Observable.create(function subscribe( observer ){...})` have the same name. In the library, they are different, but for practical purposes you can consider them  conceptually equal. This shows that `subscribe` calls are not shared among multiple Observers of the same Observable. When calling `observable.subscribe` with an Observer, the function `subscribe` in `Observable.create( function subscribe( observer ){ ... })` is run for that Observer. Each call to `observable.subscribe` triggeres its own independent setup for that given Observer.
+
+*Subscribing to an observable is like  calling a function, providing callbacks where the data will be deivered to.*
+
+A `subscribe` call is a simply a way to start an `Observable execution` and deliver values or events to an Observer of the execution.
+
+#### Executing Observables
+The code inside `Observable.credate( function subscribe( observer ){ ... })` represents an 'Observable execution`, a lazy computation that only happends for each Observer that subscriber. The execution producers multiple values over time, either synchronously or asynchronously.
+
+There are three types of values on Observable Execution can deliver:
+* **Next** notification: sends a value such as a number, a string, an object etc.
+* **Error** notification: sends a javascript error or exception.
+* **Complete** notification: does not send a value.
+
+Next notifications are expressed best in the so-called Observable Grammer or contract, written as a regular expression:
+
+```
+next*( error | complete )?
+```
+
+*In an Observable Execution, zero to infinite Next notification may be delivered. If either an Error or complete notification is delivered, then nothing else can delivered afterwards.*
+
+```
+var observable = Rx.Observable.create( function subscribe( observer )){
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+  observer.complete();
+  observer.next(4);  // Is not delivered because it would violate the contract
+});
+```
