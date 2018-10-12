@@ -439,3 +439,153 @@ An Rxjs Subject is a special type of observable that allows values to be multica
 **Every Subject is an observable** - Given a subject, you can subscribe to it, providing an observer, which will start receiving values normally. From the prespective of the observer, it cannot tell whether the observable execution is coming from a plain unicast Observable or a subject. Internally to the subject, subscribe does not invoke a new execution that delivers values. It simply registers the given observer in a list of observers, similarly to how `addListener` usually works in other libraries and language.
 
 **Every Subject is an Observer** - It is an object with the methods `next(v)`, `error(e)` and `complete()`. To feed a new value to the subject, just call the `next(value)`, and it will be multicasted to the observers registered to listen to the subject.
+
+```
+var subject = new Rx.Subject();
+subject.subscribe({
+  next: (v) => console.log( 'observableA: ' + v )
+});
+subject.subscribe({
+  next: (v) => {
+    console.log( 'observerB)
+  }
+});
+
+subject.next(1);
+subject.next(2);
+```
+
+Since a subject is an Observer, this also means you may provide a Subject as the argument to the `subscribe` of any Observable, like the example below shows:
+
+```
+var subject = new Rx.Subject();
+
+subject.subscribe({
+  next: (v) => console.log( 'observeA: ' + v )
+});
+subject.subscribe({
+  next: (v) => console.log( 'observeB' + v )
+});
+
+var observable = Rx.Observable.from([1, 2, 3]);
+observable.subscribe( subject );
+```
+There are also a few specializations of the `Subject` type: `BehaviorSubject`, and `AsyncSubject`.
+
+### Multicasted Observables
+A "multicaster Observable" passes notifications through a Subject which may have many subscribes, whereas a plain "unicast Observable" only sends notifications to a single observer.
+
+*A multicasted Observable uses a subject under the hood to make multiple observers see the same Observable execution.*
+
+Observers subscribe to anunderlying Subject, and the Subject subscribe to the sources observable.
+
+```
+var source = Rx.Observable.from([1, 2, 3]);
+var subject = new Rx.Subject();
+var multicasted = source.multicast( subject );
+
+multicasted.subscribe({
+  next: (v) => console.log( 'observerA: ' + v )
+});
+multicasted.subscribe({
+  next: (v) => console.log( 'observerB: ' +  v) 
+});
+
+multicasted.connect();
+```
+
+`multicast` returns an Observable that looks like a normal Observable, but works like a Subject when it comes to subscribing. `multicast` returns a `ConnectableObservable`, which simple an Observable with the `connect()` method. The `connect()` method is important to determine exactly when the shared Observable exxecution will start. Because `connect()` does `source.subscribe( subject )` under the hood, `connect()` returns a Subscription, which you can unsubscribe from the in order to cancel the shared Observable execution.
+
+#### Reference counting
+
+Calling `connect()` manually and handling the Subscription is often cumbersome. Usually, we want to automatically connect when the first Observer arrives, and automatically cancel the shared execution when the last Observer unsubscries.
+
+Conside the following example where subscriptions occur as outlines by this list.
+1. First Observer subscribes to the multicasted Observable
+2. **The multicasted Observable is connected**.
+3. The next value 0 is delivered to the multicasted Observable.
+4. Second Observer subscribes to the multicasted Observable.
+5. The next value 1 is delivered to the first Observer.
+6. The next value 1 is delivered to the second observer.
+7. First Observer unsubscribes from the multicasted Observable.
+8. The next value 2 is delivered to the second Observer.
+9. Second Observer unsubcribes from the multicasted Observable.
+10. **The connection to the multicasted Observable is unsubscribed**.
+
+```
+var source = Rx.Observable.interval( 500 );
+var subject =  new Rx.Subject();
+var multicasted = source.multicast( subject );
+var subscription1, subscription2, subscriptionConnect;
+
+subscription1 = multicasted.subscribe({
+  next: (v) => console.log( 'observerA: ' + v )
+});
+
+subscriptionConnect = multicasted.connect();
+
+setTimeout(() => {
+  subscription2 = multicasted.subscribe({
+    next: (v) => console.log( 'observerB: ' + v)
+  });
+}, 600 );
+
+setTimeout(() => {
+  subscription1.unsubscribe();
+}, 1200);
+
+setTimeout(() => {
+  subscription2.unsubscribe();
+  subscriptionConnect.unsubscribe();
+}, 2000);
+```
+
+If we wish to avoid explicit calls to `connect()`, we can use ConnectableObservable's `refCount()` method, which returns an Observable that keep track of how many subscribes it has. When the number of subscribers increases from `0` to `1`, it will call `connect()` for us, which starts the shared execution. Only when number of subscribers decreases from `1` to `0` will it be fully unsubscribed, stopping further execution.
+
+```
+var source = Rx.Observable.interval(500);
+var subject = new Rx.Subject();
+var refCounted = source.multicast(subject).refCount();
+var subscription1, subscription2, subscriptionConnect;
+
+// This calls `connect()`, because
+// it is the first subscriber to `refCounted`
+console.log('observerA subscribed');
+subscription1 = refCounted.subscribe({
+  next: (v) => console.log('observerA: ' + v)
+});
+
+setTimeout(() => {
+  console.log('observerB subscribed');
+  subscription2 = refCounted.subscribe({
+    next: (v) => console.log('observerB: ' + v)
+  });
+}, 600);
+
+setTimeout(() => {
+  console.log('observerA unsubscribed');
+  subscription1.unsubscribe();
+}, 1200);
+
+// This is when the shared Observable execution will stop, because
+// `refCounted` would have no more subscribers after this
+setTimeout(() => {
+  console.log('observerB unsubscribed');
+  subscription2.unsubscribe();
+}, 2000);
+```
+
+output
+
+```
+observerA subscribed
+observerA: 0
+observerB subscribed
+observerA: 1
+observerB: 1
+observerA unsubscribed
+observerB: 2
+observerB unsubscribed
+```
+
+The `refCount()` method only exists on ConnectableObservable, and it returns an `Observable`, not another ConnectableObservable.
