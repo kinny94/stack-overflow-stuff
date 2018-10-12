@@ -589,3 +589,9 @@ observerB unsubscribed
 ```
 
 The `refCount()` method only exists on ConnectableObservable, and it returns an `Observable`, not another ConnectableObservable.
+
+### BehaviourSubject
+
+One of the variants of Subjects is the `BehaviorSubject`, which has a notion of "the current value". It stores the latest value emiited to its consumers, and whenever a new Observer subscries, it will immediately receive the "current value" from the `BehaviorSubject`.
+
+*BehaviorSubject are useful for representing "value over time". For instance, an event stream of birthdays is a subject, but the stream of a person's age would be a BehaviorSubject.*
