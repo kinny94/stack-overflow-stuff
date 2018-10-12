@@ -687,4 +687,64 @@ subject.subscribe({
 subject.next( 5 );
 subject.complete();
 ```
+
 The `AsyncSubject` is similar to the last() operatorm in that it waits for the complete notification in order to deliver a single value.
+
+
+<hr/>
+
+## Operators
+
+Rxjs is mostly useful for its operators, even though the Observable is the foundation. Operators are the essential pieces that allow complex asynchronous code to be easily composed in a declarative manner. 
+
+*An Operator is a function which creates a new Observable based on the current Observable. This is a pure operation.*
+
+An operator is essentially a pure function which takes one Observable as input andd generates another Observable as output. Subscribing to the output observable will also subscribe to the input Observable. In the following example, we create a custom operator function that multiplies each value received from the input Observable by 10:
+
+
+```
+function multiplyBy10( input ){
+  var output = new Rx.Observable.create( function subscribe( observer ){
+    input.subscribe({
+      next: (v) => observer.next( 10 * v ),
+      error: ( err ) => observer.error( err ),
+      complete: () =?  observer.complete()
+    });
+  });
+  return output;
+}
+
+var input = Rx.Observable.from([1,2,3,4,5]);
+var output = multiplyBy10( input );
+output.subscribe( x => console.log( x ));
+```
+ 
+output:
+
+```
+10
+20
+30
+40
+```
+
+### Instance Operators versus Static Operators
+
+*Instance operators are fucntion that use this keyword to infer what is the input observable.*
+
+*Static operators are pure functions attached to the Observable class, and usaully are used to create Observables from scratch.*
+
+The most common type of static operators are the so-called `Creation Operators`. Instead of transforming an input Observable, they simply take a non-Observable argument,and create a new Observable. A typical example fo a static creation operator would be the `interval` function.It takes a number as an input argument and produces an Observable as output.
+
+```
+var observable = Rx.Observable.interval(1000 /* number of milliseconds */);
+```
+
+Static operators may be of different nature than simply creation. Some Combination Operators may be static, such as `merge`, `concat` etc. These makes sense as static operators because they take multiple Observables as input.
+
+```
+var observable1 = Rx.Observable.interval( 1000 );
+var observable2 = Rx.Observable.interval( 400 );
+
+var merged = Rx.Observable.merge( observable1, observable2 );
+```
