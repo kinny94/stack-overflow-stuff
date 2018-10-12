@@ -595,3 +595,96 @@ The `refCount()` method only exists on ConnectableObservable, and it returns an 
 One of the variants of Subjects is the `BehaviorSubject`, which has a notion of "the current value". It stores the latest value emiited to its consumers, and whenever a new Observer subscries, it will immediately receive the "current value" from the `BehaviorSubject`.
 
 *BehaviorSubject are useful for representing "value over time". For instance, an event stream of birthdays is a subject, but the stream of a person's age would be a BehaviorSubject.*
+
+The BehaviorSubject is initialized with the value 0 which the first Observer receives when it subscribes. The second observer receives the value 2 even though it subscribed after the value 2 was sent.
+
+```
+var subject = new Rx.BehvaiorSubject(0);
+
+subject.subscribe({
+  next: (v) => console.log('observerA : ' + v )
+});
+
+subject.next(1);
+subject.next(2);
+
+subject.subscribe({
+  next: (v) => console.log('observerB: ' + v )
+});
+
+subject.next(3);
+```
+
+Output:
+
+```
+observerA: 0
+observerA: 1
+observerA: 2
+observerB: 2
+observerA: 3
+observerB: 3
+```
+
+### ReplaySubject
+A `ReplaySubject` is similar to a `BehaviorSubject` in that it can send old values to new subscribers, but it can also record a part of the Observable execution. When creating a `ReplaySubject`, you can specify how many values to replay.
+
+*A ReplaySubject records multiple values from the observable execution and replays them to new subscribers*
+
+```
+var subject = new Rx.ReplaySubject(3);
+
+subject.subscribe({
+  next: (v) => console.log( 'observerA: ' + v )
+});
+
+subject.next(1);
+subject.next(2);
+subject.next(3);
+subject.next(4);
+
+subject.subscribe({
+  next: (v) => console.log('observerB: ' + v )
+});
+
+subject.next(5);
+```
+
+output:
+
+```
+observerA: 1
+observerA: 2
+observerA: 3
+observerA: 4
+observerB: 2
+observerB: 3
+observerB: 4
+observerA: 5
+observerB: 5
+```
+
+### AsyncSubject
+
+The AsyncSubject is a variant where only the last value of the Observable execution is sent to its observers, and only when the execution completes.
+
+```
+var subject = new Rx.AsyncSubject();
+
+subject.subscribe({
+  next: (v) =>  console.log( 'observerA: ' + v );
+})
+
+subject.next(1);
+subject.next(2);
+subject.next(3);
+subject.next(4);
+
+subject.subscribe({
+  next: (v) => console.log( 'observerB' : + v );
+});
+
+subject.next( 5 );
+subject.complete();
+```
+The `AsyncSubject` is similar to the last() operatorm in that it waits for the complete notification in order to deliver a single value.
