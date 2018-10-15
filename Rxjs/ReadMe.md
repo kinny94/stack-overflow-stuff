@@ -748,3 +748,13 @@ var observable2 = Rx.Observable.interval( 400 );
 
 var merged = Rx.Observable.merge( observable1, observable2 );
 ```
+
+### Marble Diagrams
+
+To expalin how operators work, textual descriptions are often not enough. Many operators are related to time, they may for instance delay, sample, throttle, or debounce value emission in different ways. Diagrams are often a better tool for that. Marble Diagrams are visual representations of how operators work, and include Observables, the operator and its parameterm and the output Observable.
+
+*In a marble diagram, time flows to the right, and the diagram describes how values ("marbles") are emitted on the Observable execution.*
+
+### Categories of operators
+
+There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, combination, multicasting, error handling, utility etc.
