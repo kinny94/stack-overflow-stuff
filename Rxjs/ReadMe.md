@@ -758,3 +758,56 @@ To expalin how operators work, textual descriptions are often not enough. Many o
 ### Categories of operators
 
 There are operators for different purposes, and they may be categorized as: creation, transformation, filtering, combination, multicasting, error handling, utility etc.
+
+1. Creation Operators
+2. Transformation Operators
+3. Filtering Operators 
+4. Combination Operators
+5. Mulitcating Operators
+6. Error Handling Operators
+7. Utility Operators
+8. Conditional and Boolean Operators
+9. Mathmatical and Aggregate operators
+
+<hr/>
+
+## Schedulers
+
+A Scheduler controls when a subscription starts and when notifications are delivered. It consists of three components.
+
+* A Scheduler is a data structure - It knows how to store and queue tasks based on priority or other criteria.
+* A Scheduler is an execution context - It denotes where and when the task is executed.
+* A Schedule has a ( virtual ) clock - It provides a notion of "time" by a getter method now() on the Scheduler. Task being scheduled on a particular sceduler will adhere
+only to the time denoted by the clock.
+
+*A Scheduler lets tou define in what execution context will an observable deliver notifications to its observer.*
+
+```
+var observable = Rx.Obseevable.create( function( observer ){
+  observer.next(1);
+  observer.next(2);
+  observer.next(3);
+  observer.complete();
+})
+.observeOn( Rx.Scheduler.async );
+
+console.log( 'just before subscribe' );
+
+observable.subscribe({
+  next: x => console.log( 'got value' + x ),
+  error: err => console.log( err ),
+  complete: () => console.log('done'),
+});
+console.log('just after subscribe');
+```
+
+Output:
+
+```
+just before subscribe
+just after subscribe
+got value 1
+got value 2
+got value 3
+done
+```
