@@ -811,3 +811,55 @@ got value 2
 got value 3
 done
 ```
+
+
+<hr />
+
+## Extra
+
+### Observable, Observer and Subscription
+
+```
+var button = document.querySelector( 'button' );
+
+var osberver = {
+  next: function( value ){
+    console.log( value );
+  },
+  error: function( error ){
+    console.log( error )
+  },
+  complete: function(){
+    console.log( 'Completed' );
+  }
+};
+ 
+// Rx.Observable.fromEvent( button, 'click' )
+//  .subscribe( observer ); 
+
+var subscription = Rx.Observable.create(( obs ) => {
+  obs.next( 'A Value' );
+  setTimeout(() => {
+    obs.complete();
+  }, 3000)
+  obs.next( 'A second value' );
+}).subscribe( observer );
+
+setTimeout(() => {
+  subscription.unsubscribe();
+}, 5000 );
+
+```
+
+### Rxjs Operators
+
+```
+var observable = Rx.Observable.interval( 1000 );
+var observer = {
+  next: function( value ){
+    console.log( value );
+  };
+}
+
+observable.subscribe( observe );
+```
