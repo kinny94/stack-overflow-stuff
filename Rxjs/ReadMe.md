@@ -863,3 +863,82 @@ var observer = {
 
 observable.subscribe( observe );
 ```
+
+<hr />
+
+## Important Operators
+
+### **Buffer**
+
+*Buffers the source Observable values until `closingNotifiers` emits.*
+
+* Paramateres: 
+> closingNotifier: An Observable that signals the buffer to be emitted on the output observable.
+
+* Returns :
+
+`OperatorFunction<T, T[]>`: An Observable of buffers, which are arrays of values.
+
+* Description :
+
+> Collects value from the past as an array, and emits that array only when observable emits.
+
+*Buffers the incoming Observable values until the given `closingNotifier` Observable emits a value, at which point it emits the buffer on the output Observable and starts a new buffer internally, awaiting the next time `closingNotifier` emits.*
+
+* Exmaple:
+
+```
+const clicks = fromEvent( document, 'click' );
+const interval = interval( 1000 );
+const buffered= interval.pipe( buffer( clicks ));
+buffered.subscribe( x => console.log( x ));
+```
+
+### **CatchError**
+
+* Parameters
+
+> selector: Type: `( err: any, caught: Observable ) => ObservableInput.`
+
+* Returns
+
+`OperatorFunction<T, T | R>`
+
+### **combineAll**
+
+> Flattens all the Observable of Observable by applying `combinelatest` when the Observable-of-Observable completes.
+
+* Parameters
+
+> Project: Optional. Default is `undefined`
+
+* Returns 
+
+`OperatorFunction<T, R>`:
+
+* Description
+
+`combineAll` takes an Observavble of Observable, and collects all Observable from it. Once the outer Observable completes, it subscribes to all Collected Observables and combines their values using the `combineLatest` strategy such that:
+
+  * Every time an inner Observable emits, the output Observable emits
+  * When the returned observable emits, it emits all of the latest values by:
+    * If a `project` function is provided, it is called with each recent value from each inner Observable in whatever order they arrived, and the result of the `project` function is what is emitted by the output Observable.
+    * If there is no `project` function, an array of all the most recent values is emitted by the output Observable. 
+
+* Exmaple
+
+```
+const clicks =  fromEvent( document, 'click' );
+const higherOrder = clicks.pipe(
+  map( ev => 
+    interval( Math.random() * 2000 ).pipe( take( 3 ))
+  ),
+  take( 2 )
+);
+
+const result = higherOrder.pipe(
+  combineAll()
+);
+
+result.subscribe( x =>  console.log( x ));
+```
