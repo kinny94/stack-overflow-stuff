@@ -37,6 +37,14 @@ Rx.Observable.fromEvent( button, 'click' )
 .subscribe(() =>  console.log('Clicked!'));
 ```
 
+### Reactive Programming
+
+*Streams are just a sequence of values over time. Reactive programming is the idea that we can define an application as a series of different streams with an operation that connects different streams together and which are automatically called when new values are pushed into those streams.*
+
+*Observables are blue prints for creating streams and plumbing them together with operators to create observables chain*
+
+*By default, Observables are cold and only gets hot when you subscribe to them.*
+
 #### Purity
 What makes Rxjs powerful is the ability to produce values using pure functions. That means your code is less prone to errors. Normally you would create an impure function, where other pieces of your code can mess up your state.
 
