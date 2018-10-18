@@ -9,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
@@ -29,7 +30,6 @@ import {
    YoutubeSearchResultsComponent,
    YoutubeDialogComponent
   } from './components/Youtube/youtube-search-results/youtube-search-results.component';
-import { MapComponent } from './components/map/map.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -52,7 +52,6 @@ const appRoutes: Routes = [
     YoutubeSearchComponent,
     YoutubeSearchResultsComponent,
     YoutubeDialogComponent,
-    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -60,6 +59,9 @@ const appRoutes: Routes = [
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDbIxP2GeiKE-GLWg2IgLq025LLiHVsDjk'
+    }),
     RouterModule.forRoot([
       { path: 'stack-overflow/question', component: QuestionComponent, pathMatch: 'full' },
       { path: 'stack-overflow/user', component: UserProfileComponent, pathMatch: 'full' },
@@ -67,7 +69,6 @@ const appRoutes: Routes = [
       { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
       { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
       { path: 'youtube', component: YoutubeSearchComponent, pathMatch: 'full'},
-      { path: 'map', component: MapComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])
