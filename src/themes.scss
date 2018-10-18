@@ -14,6 +14,10 @@ $youtube-primary: mat-palette( $mat-red );
 $youtube-accent: mat-palette( $mat-lime );
 $youtube-theme: mat-light-theme( $youtube-primary, $youtube-accent );
 
+$map-primary: mat-palette( $mat-lime);
+$map-accent: mat-palette( $mat-teal );
+$map-theme: mat-dark-theme( $map-primary, $map-accent );
+
 .stack-overflow{
   @include angular-material-theme($custom-theme);
 }
@@ -24,4 +28,8 @@ $youtube-theme: mat-light-theme( $youtube-primary, $youtube-accent );
 
 .youtube{
   @include angular-material-theme($youtube-theme);
+}
+
+.map{
+  @include angular-material-theme($map-theme);
 }

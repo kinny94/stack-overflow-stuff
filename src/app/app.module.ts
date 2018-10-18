@@ -29,6 +29,7 @@ import {
    YoutubeSearchResultsComponent,
    YoutubeDialogComponent
   } from './components/Youtube/youtube-search-results/youtube-search-results.component';
+import { MapComponent } from './components/map/map.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     GithubUserComponent,
     YoutubeSearchComponent,
     YoutubeSearchResultsComponent,
-    YoutubeDialogComponent
+    YoutubeDialogComponent,
+    MapComponent
   ],
   imports: [
     BrowserModule,
@@ -65,6 +67,7 @@ const appRoutes: Routes = [
       { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
       { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
       { path: 'youtube', component: YoutubeSearchComponent, pathMatch: 'full'},
+      { path: 'map', component: MapComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])
