@@ -1,3 +1,12 @@
-<p>
-  HElo
-</p>
+<div class="row">
+  <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
+    <form class="form">
+      <mat-form-field class="full-width">
+        <input matInput placeholder="Search for any user...." (input)="onChange( $event.target.value )" />
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="container">
+    <app-youtube-search-results *ngIf="searchResults" [searchResults]="searchResults"></app-youtube-search-results>
+  </div>
+</div>

@@ -16,7 +16,7 @@ $youtube-theme: mat-light-theme( $youtube-primary, $youtube-accent );
 
 $weather-primary: mat-palette( $mat-blue);
 $weather-accent: mat-palette( $mat-teal );
-$weather-theme: mat-dark-theme( $weather-primary, $weather-accent );
+$weather-theme: mat-light-theme( $weather-primary, $weather-accent );
 
 .stack-overflow{
   @include angular-material-theme($custom-theme);
