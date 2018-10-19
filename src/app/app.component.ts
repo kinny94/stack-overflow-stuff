@@ -22,7 +22,7 @@ export class AppComponent implements OnInit {
           this.themeClass = 'github';
         } else if ( route === 'youtube' ) {
           this.themeClass = 'youtube';
-        } else if ( route === 'map' ) {
+        } else if ( route === 'weather' ) {
           this.themeClass = 'map';
         }
       }

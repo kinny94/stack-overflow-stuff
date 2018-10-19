@@ -30,6 +30,7 @@ import {
    YoutubeSearchResultsComponent,
    YoutubeDialogComponent
   } from './components/Youtube/youtube-search-results/youtube-search-results.component';
+import { WeatherComponent } from './components/Weather/weather_search/weather.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
     YoutubeSearchComponent,
     YoutubeSearchResultsComponent,
     YoutubeDialogComponent,
+    WeatherComponent,
   ],
   imports: [
     BrowserModule,
@@ -68,6 +70,7 @@ const appRoutes: Routes = [
       { path: 'stack-overflow/tag/questions', component: TagQuestionsComponent, pathMatch: 'full' },
       { path: 'github', component: GithubSearchComponent, pathMatch: 'full' },
       { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
+      { path: 'weather',  component: WeatherComponent, pathMatch: 'full' },
       { path: 'youtube', component: YoutubeSearchComponent, pathMatch: 'full'},
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
