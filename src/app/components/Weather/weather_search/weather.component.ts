@@ -55,7 +55,6 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   onClick() {
-    console.log( this.city );
     this.getSearchResults( this.city );
   }
 

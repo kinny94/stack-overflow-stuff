@@ -1,19 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-weather-results',
   templateUrl: './weather-results.component.html',
   styleUrls: ['./weather-results.component.css']
 })
-export class WeatherResultsComponent implements OnInit {
+export class WeatherResultsComponent implements OnInit, OnChanges {
 
   @Input() searchResults;
   constructor() { }
 
-  imageSrc = './assets/images/rain.png';
+  imageSrc = '';
 
-  ngOnInit() {
-    console.log( this.searchResults );
+  ngOnChanges(changes: SimpleChanges): void {
+    if ( changes.searchResults.currentValue.weather[0].main === 'Fog' ) {
+      this.imageSrc = './assets/images/rain.png';
+    } else {
+      this.imageSrc = './assets/images/sunny.jpg';
+    }
   }
+
+  ngOnInit() {}
 
 }

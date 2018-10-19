@@ -1,5 +1,5 @@
 <div class="container">
-  <mat-card [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}">
-    <h4>Weather data goes here!!</h4>
+  <mat-card class="img-responsive" [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}">
+    <h4>{{ searchResults.name }}</h4>
   </mat-card>
 </div>
