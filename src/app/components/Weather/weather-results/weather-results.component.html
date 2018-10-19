@@ -1,5 +1,18 @@
 <div class="container">
-  <mat-card class="img-responsive" [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}">
-    <h4>{{ searchResults.name }}</h4>
+  <mat-card [ngStyle]="{'background-image': 'url(' + imageSrc + ')'}">
+    <div class="content">
+      <h2><strong>{{ searchResults.name }}</strong></h2>
+      <hr/>
+      <h4><strong>Weather</strong>: {{ searchResults.weather[0].main }}. {{ searchResults.weather[0].description }}</h4>
+      <hr/>
+      <h4><strong>Humidity</strong>: {{ searchResults.main.humidity }} F</h4>
+      <hr/>
+      <h4><strong>Temperature</strong>: {{ ( searchResults.main.temp - 273.15 ) * 9/5 + 32 }} F</h4>
+      <hr/>
+      <h4><strong>Maximum Temperature</strong>: {{ ( searchResults.main.temp_max - 273.15 ) * 9/5 + 32 }} F</h4>
+      <hr/>
+      <h4><strong>Minimum Temperature</strong>: {{ ( searchResults.main.temp_min - 273.15 ) * 9/5 + 32 }} F</h4>
+      <hr/>
+    </div>
   </mat-card>
 </div>

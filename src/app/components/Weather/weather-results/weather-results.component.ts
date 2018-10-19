@@ -13,7 +13,9 @@ export class WeatherResultsComponent implements OnInit, OnChanges {
   imageSrc = '';
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ( changes.searchResults.currentValue.weather[0].main === 'Fog' ) {
+    console.log( changes.searchResults.currentValue );
+    if ( changes.searchResults.currentValue.weather[0].main === 'Fog'  ||
+      changes.searchResults.currentValue.weather[0].main === 'Drizzle' ) {
       this.imageSrc = './assets/images/rain.png';
     } else {
       this.imageSrc = './assets/images/sunny.jpg';

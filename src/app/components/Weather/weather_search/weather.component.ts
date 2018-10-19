@@ -1,6 +1,5 @@
 import { map } from 'rxjs/operators';
 import { WeatherService } from './../../../services/weather-service/weather.service';
-import { WeatherService } from '../../../services/weather-service/weather.service';
 import { Observable, Subscription } from 'rxjs';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit, OnDestroy } from '@angular/core';
