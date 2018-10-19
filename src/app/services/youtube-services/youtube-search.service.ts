@@ -11,7 +11,7 @@ export class YoutubeSearchService {
 
   constructor( private http: HttpClient ) {}
 
-  getYoutTubeVideos( video: string ) {
+  getYouTubeVideos( video: string ) {
     return this.http.get( `${ this.url }${ video }&key=${ this.api_key }` );
   }
 }

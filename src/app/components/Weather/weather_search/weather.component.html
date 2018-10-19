@@ -1,12 +1,19 @@
 <div class="row">
   <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
-    <form class="form">
-      <mat-form-field class="full-width">
-        <input matInput placeholder="Search for any user...." (input)="onChange( $event.target.value )" />
-      </mat-form-field>
-    </form>
+    <div class="row">
+      <div class="col-xs-9 col-11">
+        <form class="form">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Search for a city...." (input)="onChange( $event.target.value )" />
+          </mat-form-field>
+        </form>
+      </div>
+      <div class="col-xs-3 col-1">
+        <button mat-raised-button color="accent" (click)="onClick()">Search</button>
+      </div>
+    </div>
   </div>
   <div class="container">
-    <app-youtube-search-results *ngIf="searchResults" [searchResults]="searchResults"></app-youtube-search-results>
+    <app-weather-results *ngIf="searchResults" [searchResults]="searchResults"></app-weather-results>
   </div>
 </div>

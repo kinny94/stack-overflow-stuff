@@ -31,6 +31,7 @@ import {
    YoutubeDialogComponent
   } from './components/Youtube/youtube-search-results/youtube-search-results.component';
 import { WeatherComponent } from './components/Weather/weather_search/weather.component';
+import { WeatherResultsComponent } from './components/Weather/weather-results/weather-results.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -54,6 +55,7 @@ const appRoutes: Routes = [
     YoutubeSearchResultsComponent,
     YoutubeDialogComponent,
     WeatherComponent,
+    WeatherResultsComponent,
   ],
   imports: [
     BrowserModule,
