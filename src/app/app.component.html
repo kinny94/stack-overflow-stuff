@@ -1,9 +1,41 @@
 <div [ngClass]="themeClass">
-  <app-header></app-header>
-  <div class="container">
-    <main [@routerTransition]="getState(o)">
-        <router-outlet #o="outlet"></router-outlet>
-    </main>
-  </div>
-</div>
+  <div>
+    <mat-toolbar color="primary">
+      <div fxShow="true" fxHide.gt-sm="true">
+        <button mat-icon-button (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+
+      <a mat-button class="companyName" routerLink="/">
+        <span>Search...</span>
+      </a>
+      <span class="example-spacer"></span>
+      <div fxShow="true" fxHide.lt-md="true">
+        <a  mat-button routerLink="/stack-overflow" routerLinkActive="active"><span>Stack Overflow Search</span></a>
+        <a  mat-button routerLink="/github" routerLinkActive="active"><span>Github Search</span></a>
+        <a  mat-button routerLink="/youtube" routerLinkActive="active"><span>Youtube Search</span></a>
+        <a  mat-button routerLink="/weather" routerLinkActive="active"><span>Weather</span></a>
+      </div>
+
+    </mat-toolbar>
+    <mat-sidenav-container fxFlexFill class="example-container">
+
+      <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <div fxLayout="column">
+          <a  mat-button routerLink="/stack-overflow" routerLinkActive="active"><span>Stack Overflow Search</span></a>
+          <a  mat-button routerLink="/github" routerLinkActive="active"><span>Github Search</span></a>
+          <a  mat-button routerLink="/youtube" routerLinkActive="active"><span>Youtube Search</span></a>
+          <a  mat-button routerLink="/weather" routerLinkActive="active"><span>Weather</span></a>
+        </div>
+      </mat-sidenav>
+      <mat-sidenav-content fxFlexFill>
+        <div class="container">
+          <main [@routerTransition]="getState(o)">
+            <router-outlet #o="outlet"></router-outlet>
+          </main>
+        </div>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
+  </div></div>
 

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
 import { AgmCoreModule } from '@agm/core';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header/header.component';
@@ -63,6 +64,7 @@ const appRoutes: Routes = [
     MaterialModule,
     FormsModule,
     HttpClientModule,
+    FlexLayoutModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDbIxP2GeiKE-GLWg2IgLq025LLiHVsDjk'
     }),
