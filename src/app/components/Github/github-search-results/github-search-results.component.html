@@ -1,11 +1,11 @@
 <div class="container">
-  <div *ngIf="searchResults">
+  <div *ngIf="searchResults" fxLayout="column">
     <a routerLink='/github/user' [queryParams]="{ user_id: searchResults.login }"><mat-card>
       <div class="row">
-        <div class="col-2 col-xs-12">
+        <div fxFlex="0 1 calc(15% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px">
           <img src="{{ searchResults.avatar_url }}" class="img-fluid"/>
         </div>
-        <div class="col-10 col-xs-12">
+        <div fxFlex="0 1 calc(85% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px">
           <h6><strong>Username: {{ searchResults.login }}</strong></h6>
           <h6><strong>Name: {{ searchResults.name }}</strong></h6>
           <h6><strong>Location: {{ searchResults.location }}</strong></h6>

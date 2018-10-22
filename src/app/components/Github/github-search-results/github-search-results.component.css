@@ -1,5 +1,11 @@
 .mat-card{
-  height: 250px;
+  height: auto;
+  align-items: center;
+}
+
+img{
+  width: 100%;
+  height: 200px;
 }
 
 .mat-card .img{
