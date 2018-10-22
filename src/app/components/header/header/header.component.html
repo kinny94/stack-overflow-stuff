@@ -1,11 +1,28 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <a routerLink="/stack-overflow" routerLinkActive="active"><span>Stack Overflow Search</span></a>
-    <a routerLink="/github" routerLinkActive="active"><span>Github Search</span></a>
-    <a routerLink="/youtube" routerLinkActive="active"><span>Youtube Search</span></a>
-    <a routerLink="/weather" routerLinkActive="active"><span>Weather</span></a>
-    <span class="spacer"></span>
-    <mat-icon class="icon">favorite</mat-icon>
-    <mat-icon class="icon">delete</mat-icon>
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="#"><span>Home</span></a>
+          </li>
+          <li class="nav-item active">
+            <a  class="nav-link" routerLink="/stack-overflow" routerLinkActive="active"><span>Stack Overflow Search</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/github" routerLinkActive="active"><span>Github Search</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/youtube" routerLinkActive="active"><span>Youtube Search</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" routerLink="/weather" routerLinkActive="active"><span>Weather</span></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
   </mat-toolbar-row>
 </mat-toolbar>
