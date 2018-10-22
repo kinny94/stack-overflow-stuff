@@ -1,28 +1,33 @@
-<div *ngIf="searchResults">
-  <div *ngFor="let item of searchResults.items">
-    <a  routerLink='/stack-overflow/question' [queryParams]="{ question_id: item.question_id }"><mat-card class="card">
-      <p>{{ item.title }}</p>
-      <div class="row">
-        <div class="col-10 col-xs-12">
-          <span *ngFor="let tag of item.tags">
+<div class="containerX">
+  <div *ngIf="searchResults">
+    <div *ngFor="let item of searchResults.items" class="container">
+      <a  routerLink='/stack-overflow/question' [queryParams]="{ question_id: item.question_id }"><mat-card class="card">
+        <div class="question-title">
+          <p><strong>Q. {{ item.title }}<</strong></p>
+        </div>
+        <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+          <div>
+            <span *ngFor="let tag of item.tags">
               <a routerLink='/stack-overflow/tag/questions' [queryParams]="{ tag: tag }">
                 <button class="tags click" color="accent" mat-raised-button>{{ tag }}</button>
               </a>
-          </span>
+            </span>
+          </div>
+          <div>
+            <span *ngIf="item.is_answered" class="float-right">
+              <button mat-raised-button mat-small class="answered" matBadge="{{ item.answer_count }}" matBadgePosition="before" matBadgeColor="accent">Answered</button>
+            </span>
+            <span *ngIf="!item.is_answered" class="float-right">
+              <button mat-raised-button mat-small class="not-answered">Not Answered</button>
+            </span>
+          </div>
         </div>
-        <div class="col col-xs-12">
-          <span *ngIf="item.is_answered" class="float-right">
-            <button mat-raised-button mat-small class="answered" matBadge="{{ item.answer_count }}" matBadgePosition="before" matBadgeColor="accent">Answered</button>
-          </span>
-          <span *ngIf="!item.is_answered" class="float-right">
-            <button mat-raised-button mat-small class="not-answered">Not Answered</button>
-          </span>
-        </div>
-      </div>
-    </mat-card>
-  </a>
+      </mat-card>
+    </a>
     <mat-divider></mat-divider>
   </div>
+</div>
+
 </div>
 
 

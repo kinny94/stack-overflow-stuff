@@ -45,29 +45,11 @@
   color: #DD2C00;
 }
 
-.tags{
-  margin-left: 3px;
-  margin-top: 3px;
-}
-
 a:hover{
   text-decoration: none;
   color: white;
 }
 
-@media only screen and (max-width: 600px) {
-  .card button{
-    min-width: 1%;
-    min-height: 1%;
-    font-size: 0.5em;
-  }
-
-  .card span, button{
-    margin: 0;
-  }
-
-  .mat-raised-button{
-    min-width: 0.1%;
-  }
-
+.question-title{
+  text-align: left;
 }
