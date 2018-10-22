@@ -9,7 +9,7 @@
       <hr/>
       <h4><strong>Temperature</strong>: {{ ( searchResults.main.temp - 273.15 ) * 9/5 + 32 }} F</h4>
       <hr/>
-      <h4><strong>Maximum Temperature</strong>: {{ ( searchResults.main.temp_max - 273.15 ) * 9/5 + 32 }} F</h4>
+      <h4><strong>Maximum Temperature</strong>: {{ ( searchResults.main.temp_max - 273.15 ) * 9/5 + 32 | number}} F</h4>
       <hr/>
       <h4><strong>Minimum Temperature</strong>: {{ ( searchResults.main.temp_min - 273.15 ) * 9/5 + 32 }} F</h4>
       <hr/>

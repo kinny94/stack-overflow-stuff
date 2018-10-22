@@ -1,7 +1,9 @@
 <div [ngClass]="themeClass">
   <app-header></app-header>
   <div class="container">
-    <router-outlet></router-outlet>
+    <main [@routerTransition]="getState(o)">
+        <router-outlet #o="outlet"></router-outlet>
+    </main>
   </div>
 </div>
 

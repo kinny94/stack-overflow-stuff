@@ -58,12 +58,8 @@ export class WeatherComponent implements OnInit, OnDestroy {
   }
 
   getSearchResults( city ) {
-    this.weatherSubscription = this.weatherService.getWeatherData( city ).pipe(
+    this.weatherService.getWeatherData( city ).pipe(
       map( data => data )
     ).subscribe( data => this.searchResults = data );
-  }
-
-  ngOnDestroy(): void {
-    this.weatherSubscription.unsubscribe();
   }
 }
