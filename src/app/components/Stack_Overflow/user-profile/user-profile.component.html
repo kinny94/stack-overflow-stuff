@@ -4,11 +4,11 @@
   </div>
   <ng-template #content>
     <mat-card>
-      <div class="row">
-        <div class="col-6 col-xs-12">
+      <div fxLayout="row" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+        <div fxFlex.gt-md="0 1 calc(50% - 32px)">
           <img src="{{ userData.profile_image }}"/>
         </div>
-        <div class="col-6 col-xs-12 borders profile-data">
+        <div class="borders profile-data" fxFlex.gt-md="0 1 calc(50% - 32px)">
           <h6><strong>Display Name: {{ userData.display_name }}</strong></h6>
           <h6><strong>Location: {{ userData.location }}</strong></h6>
           <h6><strong>User Since: {{ userData.last_access_date | date }}</strong></h6>

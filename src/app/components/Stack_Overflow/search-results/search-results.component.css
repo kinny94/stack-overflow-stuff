@@ -53,3 +53,9 @@ a:hover{
 .question-title{
   text-align: left;
 }
+
+button{
+  font-size: 0.9em;
+  display: inline;
+}
+
