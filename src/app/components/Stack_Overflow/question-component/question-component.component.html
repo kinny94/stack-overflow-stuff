@@ -1,9 +1,9 @@
 <div class="container">
-  <div class="col-12 question" *ngIf="!isLoading">
-    <div class="col-12">
+  <div fxLayout="column" class="question" *ngIf="!isLoading">
+    <div fxLayout="column">
       <a target="_blank" href="{{ question.link }}"><h6><strong  matBadge="{{ question.score }}"  matBadgePosition="before" matBadgeOverlap="false"  matBadgeColor="warn">Question: {{ question.title  }}</strong></h6></a>
     </div>
-    <div class="col-12 tags">
+    <div fxLayout="row" fxLayoutGap="10px" class="tags">
       <span *ngFor="let tag of question.tags">
         <a routerLink='/stack-overflow/tag/questions' [queryParams]="{ tag: tag }">
           <button class="tag" mat-raised-button color="primary">{{ tag }}</button>

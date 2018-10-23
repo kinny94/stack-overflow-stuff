@@ -14,15 +14,22 @@
       <div *ngFor="let answer of question_details$">
         <a target="_blank" href="{{ question.link }}/{{ answer.answer_id }}#{{ answer.answer_id }}"><mat-card>
           <div class="row">
-            <div class="col-4 col-xs-12"><strong><p>Answer Accepted: {{ answer.is_accepted ? "Yes" : "No" }}</p></strong></div>
-            <div class="col-4 col-xs-12"><strong><p>Score: <span matBadge="{{ answer.score }}" matBadgeOverlap="false" matBadgeColor="accent"></span></p></strong></div>
-            <div class="col-4 col-xs-12"><strong><p>Date: {{ answer.creation_date | date }}</p></strong></div>
+            <div fxFlex="0 1 calc(33% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)"><strong><p>Answer Accepted: {{ answer.is_accepted ? "Yes" : "No" }}</p></strong></div>
+            <div fxFlex="0 1 calc(33% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)"><strong><p>Score: <span matBadge="{{ answer.score }}" matBadgeOverlap="false" matBadgeColor="accent"></span></p></strong></div>
+            <div  fxFlex="0 1 calc(33% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)"><strong><p>Date: {{ answer.creation_date | date }}</p></strong></div>
           </div>
-          <strong><p>Owner details:
-            <button class="owner button-color" mat-raised-button color="primary">Reputation : {{ answer.owner.reputation }}</button>
-            <button class="owner button-color" mat-raised-button color="primary">Display Name : {{ answer.owner.display_name }}</button>
-            <a routerLink='/stack-overflow/user' [queryParams]="{ user_id: answer.owner.user_id }"><button class="owner profile" mat-raised-button color="accent">View Profile</button></a>
-          </p></strong>
+          <div fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
+            <strong><p>Owner details:</p></strong>
+            <div>
+              <button class="owner button-color" mat-raised-button color="primary">Reputation : {{ answer.owner.reputation }}</button>
+            </div>
+            <div>
+              <button class="owner button-color" mat-raised-button color="primary">Display Name : {{ answer.owner.display_name }}</button>
+            </div>
+            <div>
+              <a routerLink='/stack-overflow/user' [queryParams]="{ user_id: answer.owner.user_id }"><button class="owner profile" mat-raised-button color="accent">View Profile</button></a>
+            </div>
+          </div>
         </mat-card></a>
       </div>
     </div>
