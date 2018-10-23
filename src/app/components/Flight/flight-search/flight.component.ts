@@ -26,33 +26,92 @@ export class FlightComponent implements OnInit {
 
   state = 'mid';
   isInMid = false;
+
   searchResults: {};
-  city = '';
+
+  departureCity = '';
+  arrivalCity = '';
+  departureDate = '';
+  returnDate = '';
+
+  disabled = true;
+  roundTrip = false;
+
+  inputError = false;
+  samePlaceError = false;
+  dateError = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  onChange( event ) {
+  onDepartureCityChange( event ) {
+
+    if ( event === '' ) {
+      this.state = 'mid';
+    } else {
+      this.departureCity = event ;
+    }
+  }
+
+  onArrivalCityChange( event ) {
+
+    if ( event === '' ) {
+      this.state = 'mid';
+    } else {
+      this.arrivalCity = event ;
+    }
+  }
+
+  trip() {
+    this.roundTrip = !this.roundTrip;
+    this.disabled = !this.disabled;
+  }
+
+  onClick() {
+
+    if ( !this.roundTrip ) {
+      if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' ) {
+        this.inputError = true;
+        return;
+      } else {
+        this.inputError = false;
+      }
+    }
+
+    if ( this.roundTrip ) {
+      if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' || this.returnDate === '' ) {
+        this.inputError = true;
+        return;
+      } else {
+        this.inputError = false;
+      }
+    }
+
+    if ( !this.inputError && this.arrivalCity !== '' && this.arrivalCity === this.departureCity ) {
+      this.samePlaceError = true;
+      return;
+    } else {
+      this.samePlaceError = false;
+    }
+
+    if ( !this.inputError && this.departureDate !== '' && this.departureDate > this.returnDate ) {
+      this.dateError = true;
+      return;
+    } else {
+      this.dateError =  false;
+    }
 
     if ( this.state === 'mid' ) {
       this.state = 'up';
       this.isInMid = true;
     }
 
-    if ( event === '' ) {
-      this.state = 'mid';
-    } else {
-      this.city = event ;
-    }
-
+    this.getResults();
   }
 
-  onClick() {
-    this.getSearchResults( this.city );
-  }
+  getResults(){
 
-  getSearchResults( city ) {
   }
 }

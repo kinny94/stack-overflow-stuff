@@ -1,17 +1,62 @@
 <div class="container">
   <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
-    <div fxLayout="row" fxLayout.lt-md="column">
-      <div fxFlex="0 1 calc(80% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column">
+
+      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" >
         <form class="form">
           <mat-form-field class="full-width">
-            <input matInput placeholder="Search for a city...." (input)="onChange( $event.target.value )" />
+            <input matInput placeholder="* Departure city...." (input)="onDepartureCityChange( $event.target.value )" />
           </mat-form-field>
         </form>
       </div>
+
+      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
+        <form class="form">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="* Arrival city...." (input)="onArrivalCityChange( $event.target.value )" />
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="x">
+        <form class="form">
+          <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="* Departure date" [(ngModel)]="departureDate" name="departureDate">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <div fxFlex="0 1 calc(5% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+        <form class="form">
+            <mat-slide-toggle (change)="trip()"><span>Round Way</span></mat-slide-toggle>
+        </form>
+      </div>
+
+      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
+        <form class="form">
+          <mat-form-field>
+            <input [disabled]="disabled" matInput [matDatepicker]="picker2" placeholder="* Return date" [(ngModel)]="returnDate" name="returnDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2 [startAt]="endDate"></mat-datepicker>
+          </mat-form-field>
+        </form>
+      </div>
+
       <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
         <button mat-raised-button color="accent" (click)="onClick()">Search</button>
       </div>
     </div>
+  </div>
+  <div *ngIf="inputError">
+    <p color="primary" class="error">Fields marked with * are required.</p>
+  </div>
+  <div *ngIf="dateError">
+    <p color="primary" class="error">Dates are Incorrect.</p>
+  </div>
+  <div *ngIf="samePlaceError">
+    <p color="primary" class="error">Airpots cannot be same.</p>
   </div>
   <div class="container">
     <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>

@@ -11,3 +11,15 @@
   min-width: 100%;
   width: 100%;
 }
+
+.error{
+  color: red;
+}
+
+mat-calendar{
+  background-color: #ccc;
+}
+
+mat-slide-toggle{
+  margin-top: 15px;
+}
