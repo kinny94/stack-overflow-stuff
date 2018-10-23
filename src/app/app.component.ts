@@ -1,4 +1,4 @@
-import { trigger, animate, style, group, animateChild, query, stagger, transition } from '@angular/animations';
+import { trigger, animate, style, group, query, transition } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -46,7 +46,9 @@ export class AppComponent implements OnInit {
         } else if ( route === 'youtube' ) {
           this.themeClass = 'youtube';
         } else if ( route === 'weather' ) {
-          this.themeClass = 'map';
+          this.themeClass = 'weather';
+        } else if ( route === 'flight' ) {
+          this.themeClass = 'flight';
         }
       }
     });

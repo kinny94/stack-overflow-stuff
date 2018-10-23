@@ -1,11 +1,9 @@
-import { map } from 'rxjs/operators';
-import { WeatherService } from './../../../services/weather-service/weather.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-weather',
-  templateUrl: './weather.component.html',
+  selector: 'app-flight',
+  templateUrl: './flight.component.html',
   animations: [
     trigger('changeState', [
       state('up', style({
@@ -22,16 +20,16 @@ import { Component, OnInit } from '@angular/core';
       ]),
     ])
   ],
-  styleUrls: ['./weather.component.css']
+  styleUrls: ['./flight.component.css']
 })
-export class WeatherComponent implements OnInit {
+export class FlightComponent implements OnInit {
 
   state = 'mid';
   isInMid = false;
   searchResults: {};
   city = '';
 
-  constructor( private weatherService: WeatherService ) { }
+  constructor() { }
 
   ngOnInit() {
   }
@@ -56,8 +54,5 @@ export class WeatherComponent implements OnInit {
   }
 
   getSearchResults( city ) {
-    this.weatherService.getWeatherData( city ).pipe(
-      map( data => data )
-    ).subscribe( data => this.searchResults = data );
   }
 }

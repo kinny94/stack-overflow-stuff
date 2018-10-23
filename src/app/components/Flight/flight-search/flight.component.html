@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
+    <div fxLayout="row" fxLayout.lt-md="column">
+      <div fxFlex="0 1 calc(80% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+        <form class="form">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Search for a city...." (input)="onChange( $event.target.value )" />
+          </mat-form-field>
+        </form>
+      </div>
+      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+        <button mat-raised-button color="accent" (click)="onClick()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>
+  </div>
+</div>

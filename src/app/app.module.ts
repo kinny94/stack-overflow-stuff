@@ -33,6 +33,8 @@ import {
   } from './components/Youtube/youtube-search-results/youtube-search-results.component';
 import { WeatherComponent } from './components/Weather/weather_search/weather.component';
 import { WeatherResultsComponent } from './components/Weather/weather-results/weather-results.component';
+import { FlightComponent } from './components/Flight/flight-search/flight.component';
+import { FlightResultsComponent } from './components/Flight/flight-results/flight-results.component';
 
 const appRoutes: Routes = [
   { path: 'quwstion', component: QuestionComponent  },
@@ -57,6 +59,8 @@ const appRoutes: Routes = [
     YoutubeDialogComponent,
     WeatherComponent,
     WeatherResultsComponent,
+    FlightComponent,
+    FlightResultsComponent,
   ],
   imports: [
     BrowserModule,
@@ -76,6 +80,7 @@ const appRoutes: Routes = [
       { path: 'github/user', component: GithubUserComponent, pathMatch: 'full'},
       { path: 'weather',  component: WeatherComponent, pathMatch: 'full' },
       { path: 'youtube', component: YoutubeSearchComponent, pathMatch: 'full'},
+      { path: 'flight', component: FlightComponent, pathMatch: 'full' },
       { path: '', component: SearchComponent, pathMatch: 'full' },
       { path: '**', component: SearchComponent }
     ])

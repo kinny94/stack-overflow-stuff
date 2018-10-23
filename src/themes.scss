@@ -18,6 +18,10 @@ $weather-primary: mat-palette( $mat-blue);
 $weather-accent: mat-palette( $mat-lime );
 $weather-theme: mat-light-theme( $weather-primary, $weather-accent );
 
+$flight-primary: mat-palette( $mat-pink );
+$flight-accent: mat-palette( $mat-yellow );
+$flight-theme: mat-light-theme( $flight-primary, $flight-accent );
+
 .stack-overflow{
   @include angular-material-theme($custom-theme);
 }
@@ -30,6 +34,11 @@ $weather-theme: mat-light-theme( $weather-primary, $weather-accent );
   @include angular-material-theme($youtube-theme);
 }
 
-.map{
+.weather{
   @include angular-material-theme($weather-theme);
 }
+
+.flight{
+  @include angular-material-theme($flight-theme);
+}
+
