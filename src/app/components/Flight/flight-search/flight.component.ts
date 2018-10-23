@@ -72,6 +72,7 @@ export class FlightComponent implements OnInit {
   onClick() {
 
     if ( !this.roundTrip ) {
+      console.log('Checking empty input in single trip');
       if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' ) {
         this.inputError = true;
         return;
@@ -81,6 +82,7 @@ export class FlightComponent implements OnInit {
     }
 
     if ( this.roundTrip ) {
+      console.log('Checking empty input in round trip');
       if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' || this.returnDate === '' ) {
         this.inputError = true;
         return;
@@ -90,13 +92,15 @@ export class FlightComponent implements OnInit {
     }
 
     if ( !this.inputError && this.arrivalCity !== '' && this.arrivalCity === this.departureCity ) {
+      console.log('Checking same place error');
       this.samePlaceError = true;
       return;
     } else {
       this.samePlaceError = false;
     }
 
-    if ( !this.inputError && this.departureDate !== '' && this.departureDate > this.returnDate ) {
+    if ( !this.inputError && this.roundTrip && this.departureDate !== '' && this.departureDate > this.returnDate ) {
+      console.log('Checking date error input in single trip');
       this.dateError = true;
       return;
     } else {
@@ -108,10 +112,11 @@ export class FlightComponent implements OnInit {
       this.isInMid = true;
     }
 
+    console.log( this.departureDate );
     this.getResults();
   }
 
-  getResults(){
+  getResults() {
 
   }
 }

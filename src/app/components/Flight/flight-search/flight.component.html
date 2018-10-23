@@ -2,7 +2,7 @@
   <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
     <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column">
 
-      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" >
+      <div fxFlex="0 1 calc(20% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)" >
         <form class="form">
           <mat-form-field class="full-width">
             <input matInput placeholder="* Departure city...." (input)="onDepartureCityChange( $event.target.value )" />
@@ -10,7 +10,7 @@
         </form>
       </div>
 
-      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
+      <div fxFlex="0 1 calc(20% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
         <form class="form">
           <mat-form-field class="full-width">
             <input matInput placeholder="* Arrival city...." (input)="onArrivalCityChange( $event.target.value )" />
@@ -18,23 +18,23 @@
         </form>
       </div>
 
-      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="x">
+      <div fxFlex="0 1 calc(20% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="x">
         <form class="form">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="* Departure date" [(ngModel)]="departureDate" name="departureDate">
+            <input matInput [matDatepicker]="picker" placeholder="* Departure date" [(ngModel)]="departureDate| date:'yyyy-mm-dd'" name="departureDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
         </form>
       </div>
 
-      <div fxFlex="0 1 calc(5% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+      <div fxFlex="0 1 calc(5% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
         <form class="form">
             <mat-slide-toggle (change)="trip()"><span>Round Trip</span></mat-slide-toggle>
         </form>
       </div>
 
-      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
+      <div fxFlex="0 1 calc(20% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="10px">
         <form class="form">
           <mat-form-field>
             <input [disabled]="disabled" matInput [matDatepicker]="picker2" placeholder="* Return date" [(ngModel)]="returnDate" name="returnDate">
@@ -44,7 +44,7 @@
         </form>
       </div>
 
-      <div fxFlex="0 1 calc(20% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
+      <div fxFlex="0 1 calc(15%)" fxFlex.lt-md="0 1 calc(100% - 32px)">
         <button mat-raised-button color="accent" (click)="onClick()">Search</button>
       </div>
     </div>
