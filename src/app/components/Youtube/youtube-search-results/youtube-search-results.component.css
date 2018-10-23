@@ -7,16 +7,13 @@ mat-card:hover{
 
 p{
   margin-top: 2%;
-  font-size: 1vw;
 }
 
-h6{
-  font-size: 1.1vw;
-}
 .mat-card{
   border: 1px solid #ccc;
-  height: 80%;
+  height: 350px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .mat-dialog-container{

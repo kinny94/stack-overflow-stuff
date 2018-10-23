@@ -1,13 +1,22 @@
-<div class="container">
-  <mat-grid-list *ngIf="searchResults" cols="3" rowHeight="1:1">
-    <mat-grid-tile *ngFor="let result of searchResults">
-      <mat-card (click)="openDialog( result.id.videoId )">
-        <img  src="{{ result.snippet.thumbnails.medium.url }}" class="img-fluid"/>
-        <div>
-            <p><strong>{{ (result.snippet.title.length>30)? (result.snippet.title | slice:0:30)+'....':(result.snippet.title) }}</strong></p>
-            <h6><strong>Channel: {{ result.snippet.channelTitle }}</strong></h6>
-        </div>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+<div *ngIf="searchResults" fxLayout="row wrap" fxLayout.lt-sm="column" fxLayoutGap="32px" fxLayoutAlign="flex-start">
+  <ng-container *ngFor="let result of searchResults">
+    <mat-card fxFlex="0 1 calc(33.3% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px)" fxFlex.lt-sm="100%" (click)="openDialog( result.id.videoId )">
+      <img  src="{{ result.snippet.thumbnails.medium.url }}" class="img-fluid"/>
+      <div>
+        <p><strong>{{ (result.snippet.title.length>30)? (result.snippet.title | slice:0:30)+'....':(result.snippet.title) }}</strong></p>
+        <h6><strong>Channel: {{ result.snippet.channelTitle }}</strong></h6>
+      </div>
+    </mat-card>
+  </ng-container>
 </div>
+<!-- <mat-grid-list *ngIf="searchResults" cols="3" rowHeight="1:1">
+  <mat-grid-tile *ngFor="let result of searchResults">
+    <mat-card (click)="openDialog( result.id.videoId )">
+      <img  src="{{ result.snippet.thumbnails.medium.url }}" class="img-fluid"/>
+      <div>
+        <p><strong>{{ (result.snippet.title.length>30)? (result.snippet.title | slice:0:30)+'....':(result.snippet.title) }}</strong></p>
+        <h6><strong>Channel: {{ result.snippet.channelTitle }}</strong></h6>
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list> -->
