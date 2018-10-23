@@ -2,26 +2,26 @@
   <div *ngIf="searchResults" fxLayout="column">
     <a routerLink='/github/user' [queryParams]="{ user_id: searchResults.login }"><mat-card>
       <div class="row">
-        <div fxFlex="0 1 calc(15% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px">
+        <div fxFlex="0 1 calc(15% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px">
           <img src="{{ searchResults.avatar_url }}" class="img-fluid"/>
         </div>
-        <div fxFlex="0 1 calc(85% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(50% - 32px">
+        <div fxFlex="0 1 calc(85% - 32px)" fxFlex.lt-sm="0 1 calc(100% - 32px)" fxFlex.lt-md="0 1 calc(100% - 32px" fxLayoutGap="10px">
           <h6><strong>Username: {{ searchResults.login }}</strong></h6>
           <h6><strong>Name: {{ searchResults.name }}</strong></h6>
           <h6><strong>Location: {{ searchResults.location }}</strong></h6>
           <h6><strong>Member since: {{ searchResults.created_at }}</strong></h6>
           <h6><strong>Last Online: {{ searchResults.updated_at }}</strong></h6>
-          <h6>
-            <span>
+          <div>
+            <div class="center" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="10px">
               <button mat-raised-button class="btns">{{ searchResults.public_repos }} Repositories</button>
               <button mat-raised-button class="btns">{{ searchResults.gist }} Gists</button>
               <button mat-raised-button class="btns">{{ searchResults.follwers }} Followers</button>
               <button mat-raised-button class="btns">{{ searchResults.following }} Following</button>
-            </span>
-          </h6>
+            </div>
+          </div>
         </div>
-      </div>
-    </mat-card></a>
+        </div>
+      </mat-card></a>
+    </div>
   </div>
-</div>
 
