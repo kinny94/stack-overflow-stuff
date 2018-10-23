@@ -21,7 +21,7 @@
       <div fxFlex="0 1 calc(20% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)" fxLayoutGap="x">
         <form class="form">
           <mat-form-field>
-            <input matInput [matDatepicker]="picker" placeholder="* Departure date" [(ngModel)]="departureDate| date:'yyyy-mm-dd'" name="departureDate">
+            <input matInput [matDatepicker]="picker" placeholder="* Departure date" [(ngModel)]="departureDate" name="departureDate">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
           </mat-form-field>
