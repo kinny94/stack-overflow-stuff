@@ -59,6 +59,9 @@
     <p color="primary" class="error">Airpots cannot be same.</p>
   </div>
   <div class="container">
-    <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>
+    <mat-spinner *ngIf="isLoading; else content"></mat-spinner>
+    <ng-template #content>
+        <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>
+    </ng-template>
   </div>
 </div>

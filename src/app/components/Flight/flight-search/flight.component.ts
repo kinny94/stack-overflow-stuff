@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { FlightService } from './../../../services/flight-services/flight.service';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
@@ -28,7 +30,8 @@ export class FlightComponent implements OnInit {
   state = 'mid';
   isInMid = false;
 
-  searchResults: {};
+  searchResults;
+  isLoading = false;
 
   departureCity = '';
   arrivalCity = '';
@@ -42,7 +45,7 @@ export class FlightComponent implements OnInit {
   samePlaceError = false;
   dateError = false;
 
-  constructor() { }
+  constructor( private flightService: FlightService ) { }
 
   ngOnInit() {
   }
@@ -68,12 +71,12 @@ export class FlightComponent implements OnInit {
   trip() {
     this.roundTrip = !this.roundTrip;
     this.disabled = !this.disabled;
+    this.returnDate = '';
   }
 
   onClick() {
 
     if ( !this.roundTrip ) {
-      console.log('Checking empty input in single trip');
       if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' ) {
         this.inputError = true;
         return;
@@ -83,7 +86,6 @@ export class FlightComponent implements OnInit {
     }
 
     if ( this.roundTrip ) {
-      console.log('Checking empty input in round trip');
       if ( this.departureCity === '' || this.arrivalCity === '' || this.departureDate === '' || this.returnDate === '' ) {
         this.inputError = true;
         return;
@@ -93,15 +95,20 @@ export class FlightComponent implements OnInit {
     }
 
     if ( !this.inputError && this.arrivalCity !== '' && this.arrivalCity === this.departureCity ) {
-      console.log('Checking same place error');
       this.samePlaceError = true;
       return;
     } else {
       this.samePlaceError = false;
     }
 
+    if ( this.departureDate < Date.now().toString()  ) {
+      this.dateError = true;
+      return;
+    } else {
+      this.dateError = false;
+    }
+
     if ( !this.inputError && this.roundTrip && this.departureDate !== '' && this.departureDate > this.returnDate ) {
-      console.log('Checking date error input in single trip');
       this.dateError = true;
       return;
     } else {
@@ -113,11 +120,26 @@ export class FlightComponent implements OnInit {
       this.isInMid = true;
     }
 
-    console.log( this.departureDate );
-    this.getResults();
+    const formattedDepartureDate = moment( new Date( this.departureDate )).format('YYYYMMDD');
+    const formattedReturnDate = ( this.roundTrip ) ?  moment( new Date( this.returnDate )).format( 'YYYYMMDD' ) : this.returnDate;
+
+    this.getResults( this.departureCity, this.arrivalCity , formattedDepartureDate, formattedReturnDate );
   }
 
-  getResults() {
+  getResults( departureCity, arrivalCity, departureDate, returnDate ) {
 
+    this.isLoading = true;
+    setTimeout(() => {
+      this.searchResults = 'something';
+      this.isLoading = false;
+    }, 2000);
+
+    // this.flightService.getFlightsData( departureCity, arrivalCity, departureDate, returnDate ).pipe(
+    //   map( data => data )
+    // ).subscribe( flightsData => {
+    //   setTimeout;
+    //   this.searchResults = flightsData;
+    //   this.isLoading = false;
+    // });
   }
 }

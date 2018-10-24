@@ -14,17 +14,16 @@ export class FlightService {
 
   getFlightsData( source, destination, departureDate, returnDate  ) {
 
-    if ( !returnDate ) {
+    if ( returnDate === '' ) {
       return this.http.get(
-        `${this.url}app_id=${this.app_id}&app_key=${this.api_key}&format=json&source=${ source }
-        &destination=${ destination }&dateofdeparture=${ departureDate }&seatingclass=E&adults=1&children=0&infants=0&counter=0`
+        // tslint:disable-next-line:max-line-length
+        `${this.url}app_id=${this.app_id}&app_key=${this.api_key}&format=json&source=${ source }&destination=${ destination }&dateofdeparture=${ departureDate }&seatingclass=E&adults=1&children=0&infants=0&counter=0`
       );
     }
 
     return this.http.get(
-      `${this.url}app_id=${this.app_id}&app_key=${this.api_key}&format=json&source=${ source }
-      &destination=${ destination }&dateofdeparture=${ departureDate }&dateofarrival=${ returnDate }
-      &seatingclass=E&adults=1&children=0&infants=0&counter=0`
+      // tslint:disable-next-line:max-line-length
+      `${this.url}app_id=${this.app_id}&app_key=${this.api_key}&format=json&source=${ source }&destination=${ destination }&dateofdeparture=${ departureDate }&dateofarrival=${ returnDate }&seatingclass=E&adults=1&children=0&infants=0&counter=0`
     );
   }
 }
