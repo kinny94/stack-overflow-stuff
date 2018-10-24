@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" fxLayout="column" fxLayoutGap="50px">
   <div class="content" [@changeState]="isInMid ? 'up' : 'mid'">
     <div fxLayout="row" fxLayoutGap="20px" fxLayout.lt-md="column">
 
@@ -30,7 +30,7 @@
 
       <div fxFlex="0 1 calc(5% - 10px)" fxFlex.lt-md="0 1 calc(100% - 32px)">
         <form class="form">
-            <mat-slide-toggle (change)="trip()"><span>Round Trip</span></mat-slide-toggle>
+          <mat-slide-toggle (change)="trip()"><span>Round Trip</span></mat-slide-toggle>
         </form>
       </div>
 
@@ -61,7 +61,7 @@
   <div class="container">
     <mat-spinner *ngIf="isLoading; else content"></mat-spinner>
     <ng-template #content>
-        <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>
+      <app-flight-results *ngIf="searchResults" [searchResults]="searchResults"></app-flight-results>
     </ng-template>
   </div>
 </div>
