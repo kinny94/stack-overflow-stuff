@@ -23,3 +23,11 @@ mat-calendar{
 mat-slide-toggle{
   margin-top: 15px;
 }
+
+mat-spinner{
+  left: 50%;
+  margin-top: 10%;
+}
+.container{
+  overflow: hidden;
+}
